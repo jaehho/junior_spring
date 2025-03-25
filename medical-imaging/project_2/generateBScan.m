@@ -1,4 +1,4 @@
-function [BScan_fft, timing] = generateBScan(rawData, D, L2K)
+function [BScan, timing] = generateBScan(rawData, D, L2K)
     [nPixels, ~] = size(rawData);
     timing = struct();
 
@@ -10,16 +10,16 @@ function [BScan_fft, timing] = generateBScan(rawData, D, L2K)
 
     %% 2. Background Subtraction in k Domain
     tStart = tic;
-    avg_bg_k = mean(data_k(:, 1:D), 2);
+    avg_bg = mean(data_k(:, 1:D), 2);
     data_scans = data_k(:, D+1:end);
-    data_bs = data_scans - avg_bg_k;
+    data_bs = data_scans - avg_bg;
     timing.bg_subtraction = toc(tStart);
     fprintf('Background subtraction time: %.4f sec\n', timing.bg_subtraction);
 
     %% 3. Polynomial Fit for Background Smoothing (for deconvolution)
     tStart = tic;
     x = (1:nPixels).';
-    p = polyfit(x, avg_bg_k, 3);
+    p = polyfit(x, avg_bg, 3);
     smooth_bg = polyval(p, x);
     timing.poly_fit = toc(tStart);
     fprintf('Polynomial fitting time: %.4f sec\n', timing.poly_fit);
@@ -33,13 +33,13 @@ function [BScan_fft, timing] = generateBScan(rawData, D, L2K)
 
     %% 5. Deconvolution
     tStart = tic;
-    deconv = data_win ./ smooth_bg;
+    data_deconv = data_win ./ smooth_bg;
     timing.deconvolution = toc(tStart);
     fprintf('Deconvolution time: %.4f sec\n', timing.deconvolution);
 
     %% 6. FFT to Convert Back to the Time Domain
     tStart = tic;
-    BScan_fft = fftshift(fft(deconv, [], 1));
+    BScan = fftshift(fft(data_deconv, [], 1));
     timing.fft = toc(tStart);
     fprintf('FFT time: %.4f sec\n', timing.fft);
 end

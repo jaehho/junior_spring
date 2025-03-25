@@ -39,7 +39,7 @@ ylabel('Depth (mm)');
 title('Cropped B-Scan (Top Half, Magnitude in dB)');
 set(gca, 'YDir', 'normal');  % Deeper as y increases
 axis image;
-saveas(gcf, 'figures/BScan_Processed_Cropped_mm.png');
+saveas(gcf, 'figures/BScan_Processed_Cropped_mm.svg');
 
 %% Display Timing Information
 disp('Timing breakdown (in seconds):');

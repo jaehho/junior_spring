@@ -27,3 +27,13 @@ For your report, I would like a brief summary of how the function works, a discu
 ---
 
 Create an image from all of the scans in Bcan_Layers.raw. Do not use the function from above, but instead write a new B-Scan function of a similar form to the A-Scan function that avoids any redundant computation. This should not require any loops at all. 
+
+---
+
+The files titled `MScanX.raw`, where X is 1 or 40, contain samples from a speaker playing X tones at 80 dB SPL. The first \( D \) columns of each data set are background, and the next \( R \) are A-Scans taken at one location with a sampling rate of \( f_s \) — that is, spaced \( \Delta t = 1 / f_s \) apart.
+
+To begin, produce the average of the A-Scan magnitudes from the 1-tone M-Scan.
+
+Then write a script which performs spectral domain phase microscopy (SDPM) given a time series of complex A-Scans, \( \Delta t \), and a pixel at which to track sub-pixel motion. It should return a vector of time-domain data in units nm. Remember to unwrap the angle.
+
+Do the same for the other M-Scan. Present these outputs in time and frequency.

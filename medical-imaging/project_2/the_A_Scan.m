@@ -28,23 +28,23 @@ load('project-files/L2K.mat', 'L2K');
 
 %% Process the Data Entirely in the k Domain Using generateAScan_k
 fprintf('\nProcessing BScan_Layers.raw...\n');
-[AScan_B, timing_B] = generateAScan(BScan, D_BScan, L2K);
+[BScan_B, timing_B] = generateBScan(BScan, D_BScan, L2K);
 
 fprintf('\nProcessing MScan1.raw...\n');
-[AScan_M1, timing_M1] = generateAScan(MScan1, D_MScan, L2K);
+[BScan_M1, timing_M1] = generateBScan(MScan1, D_MScan, L2K);
 
 fprintf('\nProcessing MScan40.raw...\n');
-[AScan_M40, timing_M40] = generateAScan(MScan40, D_MScan, L2K);
+[BScan_M40, timing_M40] = generateBScan(MScan40, D_MScan, L2K);
 
 %% Select Example A-Scans for Display
 % For BScan_Layers.raw, choose two A-scans:
-A_B1 = AScan_B(:, D_BScan + 5);   % e.g., a few scans past the background region.
-midIndex = round((size(AScan_B, 2) + D_BScan) / 2);
-A_B2 = AScan_B(:, midIndex);
+A_B1 = BScan_B(:, D_BScan + 5);   % e.g., a few scans past the background region.
+midIndex = round((size(BScan_B, 2) + D_BScan) / 2);
+A_B2 = BScan_B(:, midIndex);
 
 % For the MScan files, select one A-scan from each (e.g., a few columns past the background region).
-A_M1 = AScan_M1(:, D_MScan + 5);
-A_M40 = AScan_M40(:, D_MScan + 5);
+A_M1 = BScan_M1(:, D_MScan + 5);
+A_M40 = BScan_M40(:, D_MScan + 5);
 
 %% Plot the Magnitude (in dB) of the Selected A-Scans
 figure;
@@ -52,25 +52,25 @@ plot(20*log10(abs(A_B1)));
 title('BScan\_Layers.raw - A-Scan 1 (Magnitude in dB)');
 xlabel('Depth Index');
 ylabel('Magnitude (dB)');
-saveas(gcf, 'figures/AScan_B1.png');
+saveas(gcf, 'figures/AScan_B1.svg');
 
 figure;
 plot(20*log10(abs(A_B2)));
 title('BScan\_Layers.raw - A-Scan 2 (Magnitude in dB)');
 xlabel('Depth Index');
 ylabel('Magnitude (dB)');
-saveas(gcf, 'figures/AScan_B2.png');
+saveas(gcf, 'figures/AScan_B2.svg');
 
 figure;
 plot(20*log10(abs(A_M1)));
 title('MScan1.raw - A-Scan (Magnitude in dB)');
 xlabel('Depth Index');
 ylabel('Magnitude (dB)');
-saveas(gcf, 'figures/AScan_M1.png');
+saveas(gcf, 'figures/AScan_M1.svg');
 
 figure;
 plot(20*log10(abs(A_M40)));
 title('MScan40.raw - A-Scan (Magnitude in dB)');
 xlabel('Depth Index');
 ylabel('Magnitude (dB)');
-saveas(gcf, 'figures/AScan_M40.png');
+saveas(gcf, 'figures/AScan_M40.svg');
