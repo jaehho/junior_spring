@@ -13,3 +13,17 @@ Given the information in the introduction, compute the following:
 1. The lateral resolution of the system. What limits the lateral resolution?
 2. The axial resolution of the system. What limits the axial resolution?
 3. The B-Scan “pixel” aspect ratios. What will the B-Scan’s aspect ratio be, with/without accounting for the “mirror image” artifact of OCT.
+
+---
+
+Write a function that generates a complex A-Scan in the spatial domain. It should include background subtraction as well as windowing and deconvolution. For deconvolution, smooth your background using a polynomial fit (you will want to toy around with the order of this fit by looking at the average background vs the fit). Do not use the smoothed background for background subtraction, but instead use the regular average background. This should not require any for loops at all.
+
+This function may take a bit of time to run. Add time markers to your function and either return or print the amount of time each step takes. Comment on these values in your report.
+
+Display the magnitude (in dB) of 2 A-Scans from BScan_Layers.raw, and one from each of the MScan files. The M-Scan ones should look pretty similar to one another.
+
+For your report, I would like a brief summary of how the function works, a discussion of the time taken by different steps in the function, and the plots of these A-Scan magnitudes. I want you to then try to run the same code on any single A-Scan you found looked nice a) without deconvolution or background subtraction, and b) without deconvolution but with background subtraction. In your report, compare these to the signal processed with the full pipeline, and explain the differences you see.
+
+---
+
+Create an image from all of the scans in Bcan_Layers.raw. Do not use the function from above, but instead write a new B-Scan function of a similar form to the A-Scan function that avoids any redundant computation. This should not require any loops at all. 
