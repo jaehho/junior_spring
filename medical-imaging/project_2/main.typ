@@ -21,3 +21,5 @@
 = Introduction
 
 = Methodology
+
+L2K transforms the data into the linearly sampled data in the k domain via interpolation as $k = 2 pi / lambda$
