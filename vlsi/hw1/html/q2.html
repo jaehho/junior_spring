@@ -1,0 +1,193 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      -->
+<title>q2</title>
+<meta name="generator" content="MATLAB 24.2">
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.date" content="2025-03-28">
+<meta name="DC.source" content="q2.m">
+<style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; }
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+span.typesection { color:#A0522D }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style>
+</head>
+<body>
+<div class="content">
+<pre class="codeinput">clc; clear; close <span class="string">all</span>;
+
+syms <span class="string">V_in</span> <span class="string">V_out</span> <span class="string">V_x</span> <span class="string">V_s1</span> <span class="string">R_1</span> <span class="string">R_2</span> <span class="string">R_D1</span> <span class="string">R_D2</span> <span class="string">g_m1</span> <span class="string">g_m2</span> <span class="string">r_o</span> <span class="string">I_D2</span> <span class="string">R_1p2</span> <span class="string">gain_1</span> <span class="string">gain_2</span> <span class="string">open_loop_gain</span>
+
+<span class="comment">% stage 1</span>
+eqn1 = -V_x / R_D1 == V_s1 / (R_1p2);
+eqn2 = V_s1 / (R_1p2) == g_m1 * (V_in - V_s1) + (V_x - V_s1) / r_o;
+eqn_gain1 = gain_1 == V_x / V_in;
+
+sol_gain_1 = solve([eqn1, eqn2, eqn_gain1], [gain_1, V_x, V_in])
+
+<span class="comment">% stage 2</span>
+eqn3 = -V_out / R_D2 == V_out / (R_1 + R_2) + I_D2;
+eqn4 = I_D2 == g_m2 * V_x + V_out / r_o;
+eqn_gain2 = gain_2 == V_out / V_x;
+
+sol_gain_2 = solve([eqn3, eqn4, eqn_gain2], [gain_2, V_out, V_x])
+
+<span class="comment">% open loop gain</span>
+eqn_open_loop_gain = open_loop_gain == gain_1 * gain_2;
+
+sol_open_loop_gain = solve([eqn1, eqn2, eqn3, eqn4, eqn_gain1, eqn_gain2, eqn_open_loop_gain], [open_loop_gain, gain_1, gain_2, V_out, V_in])
+
+fprintf(<span class="string">'Gain 1: \n'</span>)
+pretty(sol_gain_1.gain_1)
+fprintf(<span class="string">'Gain 2: \n'</span>)
+pretty(sol_gain_2.gain_2)
+fprintf(<span class="string">'Open Loop Gain: \n'</span>)
+pretty(sol_open_loop_gain.open_loop_gain)
+</pre>
+<pre class="codeoutput">
+sol_gain_1 = 
+
+  struct with fields:
+
+    gain_1: -(R_D1*g_m1*r_o)/(R_1p2 + R_D1 + r_o + R_1p2*g_m1*r_o)
+       V_x: -(R_D1*V_s1)/R_1p2
+      V_in: (R_1p2*V_s1 + R_D1*V_s1 + V_s1*r_o + R_1p2*V_s1*g_m1*r_o)/(R_1p2&hellip;
+
+
+sol_gain_2 = 
+
+  struct with fields:
+
+    gain_2: -(g_m2*r_o*(R_1*R_D2 + R_2*R_D2))/(R_1*R_D2 + R_2*R_D2 + R_1*r_o&hellip;
+     V_out: -(I_D2*R_1*R_D2 + I_D2*R_2*R_D2)/(R_1 + R_2 + R_D2)
+       V_x: (I_D2*R_1*R_D2 + I_D2*R_2*R_D2 + I_D2*R_1*r_o + I_D2*R_2*r_o + I&hellip;
+
+
+sol_open_loop_gain = 
+
+  struct with fields:
+
+    open_loop_gain: [0&times;1 sym]
+            gain_1: [0&times;1 sym]
+            gain_2: [0&times;1 sym]
+             V_out: [0&times;1 sym]
+              V_in: [0&times;1 sym]
+
+Gain 1: 
+             R_D1 g_m1 r_o
+- -----------------------------------
+  R_1p2 + R_D1 + r_o + R_1p2 g_m1 r_o
+
+Gain 2: 
+            g_m2 r_o (R_1 R_D2 + R_2 R_D2)
+- --------------------------------------------------
+  R_1 R_D2 + R_2 R_D2 + R_1 r_o + R_2 r_o + R_D2 r_o
+
+Open Loop Gain: 
+()
+
+</pre>
+<p class="footer">
+<br>
+<a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2024b</a>
+<br>
+</p>
+</div>
+<!--
+##### SOURCE BEGIN #####
+clc; clear; close all;
+
+syms V_in V_out V_x V_s1 R_1 R_2 R_D1 R_D2 g_m1 g_m2 r_o I_D2 R_1p2 gain_1 gain_2 open_loop_gain
+
+% stage 1
+eqn1 = -V_x / R_D1 == V_s1 / (R_1p2);
+eqn2 = V_s1 / (R_1p2) == g_m1 * (V_in - V_s1) + (V_x - V_s1) / r_o;
+eqn_gain1 = gain_1 == V_x / V_in;
+
+sol_gain_1 = solve([eqn1, eqn2, eqn_gain1], [gain_1, V_x, V_in])
+
+% stage 2
+eqn3 = -V_out / R_D2 == V_out / (R_1 + R_2) + I_D2;
+eqn4 = I_D2 == g_m2 * V_x + V_out / r_o;
+eqn_gain2 = gain_2 == V_out / V_x;
+
+sol_gain_2 = solve([eqn3, eqn4, eqn_gain2], [gain_2, V_out, V_x])
+
+% open loop gain
+eqn_open_loop_gain = open_loop_gain == gain_1 * gain_2;
+
+sol_open_loop_gain = solve([eqn1, eqn2, eqn3, eqn4, eqn_gain1, eqn_gain2, eqn_open_loop_gain], [open_loop_gain, gain_1, gain_2, V_out, V_in])
+
+fprintf('Gain 1: \n')
+pretty(sol_gain_1.gain_1)
+fprintf('Gain 2: \n')
+pretty(sol_gain_2.gain_2)
+fprintf('Open Loop Gain: \n')
+pretty(sol_open_loop_gain.open_loop_gain)
+
+##### SOURCE END #####
+-->
+</body>
+</html>
