@@ -55,9 +55,8 @@ displacement_M1 = (center_wavelength/(4*pi)) * phase_unwrapped_M1 * 1e9;
 % Time axis for plotting
 t_M1 = (0:length(displacement_M1)-1) * dt;
 
-figure;
+figure("Name", "Displacement vs. Time (MScan1)");
 plot(t_M1, displacement_M1);
-title('Displacement vs. Time (MScan1)');
 xlabel('Time (s)');
 ylabel('Displacement (nm)');
 exportgraphics(gcf, 'figures/Displacement_Time_MScan1.png', 'Resolution', 300);
@@ -67,9 +66,8 @@ N1 = length(displacement_M1);
 f_M1 = (0:N1-1)/(N1*dt);
 displacement_fft_M1 = abs(fft(displacement_M1));
 
-figure;
+figure("Name", "Displacement Frequency Spectrum (MScan1)");
 plot(f_M1, displacement_fft_M1);
-title('Displacement Frequency Spectrum (MScan1)');
 xlabel('Frequency (Hz)');
 ylabel('Amplitude');
 exportgraphics(gcf, 'figures/Displacement_Freq_MScan1.png', 'Resolution', 300);
@@ -81,9 +79,8 @@ phase_unwrapped_M40 = unwrap(angle(time_series_M40));
 displacement_M40 = (center_wavelength/(4*pi)) * phase_unwrapped_M40 * 1e9;
 t_M40 = (0:length(displacement_M40)-1) * dt;
 
-figure;
+figure("Name", "Displacement vs. Time (MScan40)");
 plot(t_M40, displacement_M40);
-title('Displacement vs. Time (MScan40)');
 xlabel('Time (s)');
 ylabel('Displacement (nm)');
 exportgraphics(gcf, 'figures/Displacement_Time_MScan40.png', 'Resolution', 300);
@@ -93,9 +90,8 @@ N40 = length(displacement_M40);
 f_M40 = (0:N40-1)/(N40*dt);
 displacement_fft_M40 = abs(fft(displacement_M40));
 
-figure;
+figure("Name", "Displacement Frequency Spectrum (MScan40)");
 plot(f_M40, displacement_fft_M40);
-title('Displacement Frequency Spectrum (MScan40)');
 xlabel('Frequency (Hz)');
 ylabel('Amplitude');
 exportgraphics(gcf, 'figures/Displacement_Freq_MScan40.png', 'Resolution', 300);
