@@ -4,20 +4,7 @@ clc; clear; close all;
 BScan_raw = loadRawFile('project-files/BScan_Layers.raw');
 MScan1_raw = loadRawFile('project-files/MScan1.raw');
 MScan40_raw = loadRawFile('project-files/MScan40.raw');
-
-N_axial = 2048; % Number of pixels per A-scan
-lambda0 = 1310e-9; % Center wavelength [m]
-delta_lambda = 100e-9; % Spectral bandwidth [m]
-NA = 0.055; % Numerical Aperture
-dz = 3.6e-6; % Axial pixel size [m]
-n_air = 1.0; % Refractive index of air
-
-fs = 97656.25; % Sampling frequency for MScan [Hz]
-
-BScan_width = 1.0e-3; % Width of B-scan [m]
-
-D_BScan = 175;
-D_MScan = 320;
+run('dataParams.m');
 
 % Reshape
 BScan = reshape(BScan_raw, N_axial, []);
@@ -42,10 +29,10 @@ fprintf('MScan40.raw: %d total columns, %d background, %d A-scans\n', ...
         nScans_M40, D_MScan, nScans_M40 - D_MScan);
 
 %% 1. Lateral Resolution (Diffraction-limited)
-lateral_res = 0.37 * lambda0 / NA; 
+lateral_res = 0.37 * lambda_0 / NA; 
 
 %% 2. Axial Resolution (Coherence length-based)
-axial_res = (2 * log(2)) / (n_air * pi) * lambda0^2 / delta_lambda;
+axial_res = (2 * log(2)) / (n_air * pi) * lambda_0^2 / delta_lambda;
 
 %% 3. B-Scan Aspect Ratios
 dx = BScan_width / M; % Lateral sampling step [m]

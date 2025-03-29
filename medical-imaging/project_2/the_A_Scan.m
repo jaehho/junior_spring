@@ -1,17 +1,11 @@
 clc; clear; close all;
 
-dz = 3.6e-6; % 3.6 um in meters
-fs = 97656.25; % Sampling frequency [Hz]
-D_BScan = 175; % Number of background A-scans in BScan_Layers.raw
-BScan_width = 1e-3; % 1 mm width of B-scan
-D_MScan = 320; % Number of background A-scans in MScan files
-N_axial = 2048; % Number of pixels per A-scan
-
 %% Load RAW Files
 BScan_raw   = loadRawFile('project-files/BScan_Layers.raw');
 MScan1_raw  = loadRawFile('project-files/MScan1.raw');
 MScan40_raw = loadRawFile('project-files/MScan40.raw');
 load('project-files/L2K.mat', 'L2K');
+run('dataParams.m');
 
 %% Process the Data Entirely in the k Domain Using generateAScan_k
 fprintf('\nProcessing BScan_Layers.raw...\n');
@@ -43,28 +37,28 @@ figure("Name", "A-Scans");
 tiledlayout(2, 2);
 nexttile;
 
-plot(z, 20*log10(abs(AScan_B1)));
+plot(z, 20*log10(abs(fftshift(AScan_B1))));
 axis tight;
 title('BScan Layers - A-Scan 1 [dB]');
 xlabel('Depth Index');
 ylabel('Magnitude [dB]');
 
 nexttile;
-plot(z, 20*log10(abs(AScan_BMid)));
+plot(z, 20*log10(abs(fftshift(AScan_BMid))));
 axis tight;
 title('BScan Layers - A-Scan Mid-Index [dB]');
 xlabel('Depth Index');
 ylabel('Magnitude [dB]');
 
 nexttile;
-plot(z, 20*log10(abs(AScan_M1)));
+plot(z, 20*log10(abs(fftshift(AScan_M1))));
 axis tight;
 title('MScan1 - A-Scan [dB]');
 xlabel('Depth Index');
 ylabel('Magnitude [dB]');
 
 nexttile;
-plot(z, 20*log10(abs(AScan_M40)));
+plot(z, 20*log10(abs(fftshift(AScan_M40))));
 axis tight;
 title('MScan40 - A-Scan [dB]');
 xlabel('Depth Index');
@@ -73,7 +67,7 @@ ylabel('Magnitude [dB]');
 exportgraphics(gcf, 'figures/AScans.png', 'Resolution', 300);
 
 figure("Name", "A-Scan Processing Comparison");
-plot(z, 20*log10(abs(AScan_BMid)), z, 20*log10(abs(AScan_BMid_no_deconv_no_bgs)), z, 20*log10(abs(AScan_BMid_no_deconv)));
+plot(z, 20*log10(abs(fftshift(AScan_BMid))), z, 20*log10(abs(fftshift(AScan_BMid_no_deconv_no_bgs))), z, 20*log10(abs(fftshift(AScan_BMid_no_deconv))));
 axis tight;
 xlabel('Depth Index');
 ylabel('Magnitude [dB]');

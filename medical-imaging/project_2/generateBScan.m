@@ -1,13 +1,13 @@
-function [B_scan, timing] = generateBScan(detector_current, num_z_pixels, num_bg_scans, L2K, do_bg_subtract, do_deconv, verbose)
+function [B_scan, timing] = generateBScan(detector_current, N_axial, D, L2K, do_bg_subtract, do_deconv, verbose)
     timing = struct();
 
-    detector_current_reshaped   = reshape(detector_current, num_z_pixels, []);
+    detector_current_reshaped   = reshape(detector_current, N_axial, []);
 
     if verbose
         figure("Name", "B-Scan Processing Steps");
         steps_fig = tiledlayout('vertical');
         nexttile(steps_fig);
-        plot(detector_current_reshaped(:,num_bg_scans+1));
+        plot(detector_current_reshaped(:,D+1));
         axis tight;
         title('Detector Current');
 
@@ -18,7 +18,7 @@ function [B_scan, timing] = generateBScan(detector_current, num_z_pixels, num_bg
         axis tight;
         title('Detector Current - Background Scan');
         nexttile(detector_current_fig);
-        plot(detector_current_reshaped(:,num_bg_scans+1));
+        plot(detector_current_reshaped(:,D+1));
         axis tight;
         title('Detector Current - Imaging Scan');
     end
@@ -30,13 +30,13 @@ function [B_scan, timing] = generateBScan(detector_current, num_z_pixels, num_bg
     fprintf('L2K conversion time: %.4f sec\n', timing.L2K_conversion);
     if verbose
         nexttile(steps_fig);
-        plot(data_k(:,num_bg_scans+1));
+        plot(data_k(:,D+1));
         axis tight;
         title('Data in k Domain');
     end
 
-    avg_bg = mean(data_k(:, 1:num_bg_scans), 2);
-    data_scans = data_k(:, num_bg_scans+1:end);
+    avg_bg = mean(data_k(:, 1:D), 2);
+    data_scans = data_k(:, D+1:end);
 
     %% 2. Background Subtraction in k Domain
     if do_bg_subtract
@@ -56,7 +56,7 @@ function [B_scan, timing] = generateBScan(detector_current, num_z_pixels, num_bg
 
     %% 3. Windowing
     tStart = tic;
-    window = gausswin(num_z_pixels);
+    window = gausswin(N_axial);
     data_win = data_bs .* window;
     timing.windowing = toc(tStart);
     fprintf('Windowing time: %.4f sec\n', timing.windowing);
@@ -70,7 +70,7 @@ function [B_scan, timing] = generateBScan(detector_current, num_z_pixels, num_bg
     %% 4. Deconvolution
     if do_deconv
         tStart = tic;
-        x = (1:num_z_pixels)';
+        x = (1:N_axial)';
         p = polyfit(x, avg_bg, 3);
         smooth_bg = polyval(p, x);
         data_deconv = data_win ./ smooth_bg;
@@ -88,7 +88,7 @@ function [B_scan, timing] = generateBScan(detector_current, num_z_pixels, num_bg
 
     %% 6. FFT to Spatial Domain
     tStart = tic;
-    B_scan = fftshift(fft(data_deconv, [], 1), 1);
+    B_scan = fft(data_deconv, [], 1);
     timing.fft = toc(tStart);
     fprintf('FFT time: %.4f sec\n', timing.fft);
     if verbose

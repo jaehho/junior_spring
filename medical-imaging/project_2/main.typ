@@ -23,3 +23,6 @@
 = Methodology
 
 L2K transforms the data into the linearly sampled data in the k domain via interpolation as $k = 2 pi / lambda$
+
+// the b-scan: to account for the mirror image artifact, the "negative" frequency components of the A-scans were used and the positive frequency components were discarded. The results should be the same regardless of using positive or negative frequency components, however to align with the A-Scan equation, the negative frequency components were used to represent the cross correlation terms. 
+// Unnecessary and might be wrong ^^^
