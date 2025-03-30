@@ -1,11 +1,11 @@
-BScan_width = 1e-3; % Width of B-scan [m]
+Bscan_width = 1e-3; % Width of Bscan [m]
 dz = 3.6e-6; % Axial pixel size [m]
 lambda_0 = 1310e-9; % Center wavelength [m]
 delta_lambda = 100e-9; % Spectral bandwidth [m]
-fs = 97656.25; % Sampling frequency for M-Scans [Hz]
-dt = 1/fs; % Time interval between A-Scans in M-Scan [s]
-D_BScan = 175; % Number of background A-scans in BScan_Layers.raw
-D_MScan = 320; % Number of background A-scans in MScan files
-N_axial = 2048; % Number of pixels per A-scan
+fs = 97656.25; % Sampling frequency for Mscans [Hz]
+dt = 1/fs; % Time interval between Ascans in Mscan [s]
+D_Bscan = 175; % Number of background Ascans in Bscan_Layers.raw
+D_Mscan = 320; % Number of background Ascans in Mscan files
+N_axial = 2048; % Number of pixels per Ascan
 NA = 0.055; % Numerical Aperture
 n_air = 1.0; % Refractive index of air

@@ -1,14 +1,15 @@
-function [B_scan, timing] = generateBScan(detector_current, N_axial, D, L2K, do_bg_subtract, do_deconv, verbose)
+function [Bscan, timing] = generate_Bscan(detector_current, N_axial, D, L2K, do_bg_subtract, do_deconv, verbose)
     timing = struct();
 
     detector_current_reshaped   = reshape(detector_current, N_axial, []);
 
     if verbose
-        processing_fig = figure("Name", "B-Scan Processing Steps");
+        processing_fig = figure("Name", "Ascan Processing Steps");
         steps_fig = tiledlayout(processing_fig, 'vertical');
         nexttile(steps_fig);
         plot(detector_current_reshaped(:,D+1));
         axis tight;
+        set(gca, 'XTick', [], 'YTick', []);
         title('Detector Current');
 
         detector_fig = figure("Name", "Detector Current");
@@ -16,11 +17,13 @@ function [B_scan, timing] = generateBScan(detector_current, N_axial, D, L2K, do_
         nexttile(detector_current_fig);
         plot(detector_current_reshaped(:,1));
         axis tight;
-        title('Detector Current - Background Scan');
+        set(gca, 'XTick', [], 'YTick', []);
+        title('Background');
         nexttile(detector_current_fig);
         plot(detector_current_reshaped(:,D+1));
         axis tight;
-        title('Detector Current - Imaging Scan');
+        set(gca, 'XTick', [], 'YTick', []);
+        title('Imaging');
         exportgraphics(detector_fig, 'figures/Detector_Current.png', 'Resolution', 300);
     end
 
@@ -33,7 +36,8 @@ function [B_scan, timing] = generateBScan(detector_current, N_axial, D, L2K, do_
         nexttile(steps_fig);
         plot(data_k(:,D+1));
         axis tight;
-        title('Data in k Domain');
+        set(gca, 'XTick', [], 'YTick', []);
+        title('K-space');
     end
 
     avg_bg = mean(data_k(:, 1:D), 2);
@@ -49,7 +53,8 @@ function [B_scan, timing] = generateBScan(detector_current, N_axial, D, L2K, do_
             nexttile(steps_fig);
             plot(data_bs(:,1));
             axis tight;
-            title('Data after Background Subtraction');
+            set(gca, 'XTick', [], 'YTick', []);
+            title('Background Subtraction');
         end
     else
         data_bs = data_scans;
@@ -65,7 +70,8 @@ function [B_scan, timing] = generateBScan(detector_current, N_axial, D, L2K, do_
         nexttile(steps_fig);
         plot(data_win(:,1));
         axis tight;
-        title('Data after Windowing');
+        set(gca, 'XTick', [], 'YTick', []);
+        title('Gaussian Window');
     end
 
     %% 4. Deconvolution
@@ -81,7 +87,8 @@ function [B_scan, timing] = generateBScan(detector_current, N_axial, D, L2K, do_
             nexttile(steps_fig);
             plot(data_deconv(:,1));
             axis tight;
-            title('Data after Deconvolution');
+            set(gca, 'XTick', [], 'YTick', []);
+            title('Deconvolution');
         end
     else
         data_deconv = data_win;
@@ -89,15 +96,16 @@ function [B_scan, timing] = generateBScan(detector_current, N_axial, D, L2K, do_
 
     %% 6. FFT to Spatial Domain
     tStart = tic;
-    B_scan = fft(data_deconv, [], 1);
+    Bscan = fft(data_deconv, [], 1);
     timing.fft = toc(tStart);
     fprintf('FFT time: %.4f sec\n', timing.fft);
     if verbose
         nexttile(steps_fig);
-        plot(abs(B_scan(:,1)));
+        plot(abs(Bscan(:,1)));
         axis tight;
-        title('B-Scan - FFT Result');
+        set(gca, 'XTick', [], 'YTick', []);
+        title('FFT');
         processing_fig.Position = [100, 100, 560, 420 * 3];
-        exportgraphics(processing_fig, 'figures/B_Scan_Processing.png', 'Resolution', 300);
+        exportgraphics(processing_fig, 'figures/Ascan_Processing.png', 'Resolution', 300);
     end
 end

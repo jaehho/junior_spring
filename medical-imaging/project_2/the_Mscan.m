@@ -1,21 +1,21 @@
 clc; clear; close all;
 
 %% Load RAW Files and Parameters
-MScan1_raw  = loadRawFile('project-files/MScan1.raw');
-MScan40_raw = loadRawFile('project-files/MScan40.raw');
+Mscan1_raw  = loadRawFile('project-files/Mscan1.raw');
+Mscan40_raw = loadRawFile('project-files/Mscan40.raw');
 load('project-files/L2K.mat', 'L2K');
 run('dataParams.m');
 
-%% Generate B-Scans for Both Datasets
-[MScan_M1, timing_M1]   = generateBScan(MScan1_raw, N_axial, D_MScan, L2K, true, true, false);
-[MScan_M40, timing_M40] = generateBScan(MScan40_raw, N_axial, D_MScan, L2K, true, true, false);
+%% Generate Bscans for Both Datasets
+[Mscan_M1, timing_M1]   = generate_Bscan(Mscan1_raw, N_axial, D_Mscan, L2K, true, true, false);
+[Mscan_M40, timing_M40] = generate_Bscan(Mscan40_raw, N_axial, D_Mscan, L2K, true, true, false);
 
 %% Crop to Half Axial Range and Define Depth Axis
 N_half = round(N_axial / 2);
 z = (1:N_half) * dz;  % z in meters
 
-MScan_M1_cropped   = MScan_M1(1:N_half, :);
-MScan_M40_cropped  = MScan_M40(1:N_half, :);
+Mscan_M1_cropped   = Mscan_M1(1:N_half, :);
+Mscan_M40_cropped  = Mscan_M40(1:N_half, :);
 
 %% Define Depth Range for Peak Detection (convert depth bounds from mm to meters)
 depth_lower = 0.1;  % in mm
@@ -23,43 +23,43 @@ depth_upper = 0.5;  % in mm
 % Since z is in meters and dz is in meters, convert mm->m by dividing by 1e3
 depth_range_idx = round(depth_lower/1e3/dz):round(depth_upper/1e3/dz);
 
-%% Loop Over Both M-Scans
-scans    = {'MScan1', 'MScan40'};
-MScans   = {MScan_M1_cropped, MScan_M40_cropped};
+%% Loop Over Both Mscans
+scans    = {'Mscan1', 'Mscan40'};
+Mscans   = {Mscan_M1_cropped, Mscan_M40_cropped};
 timings  = {timing_M1, timing_M40};  % if needed later
 
 for scanNum = 1:length(scans)
     scanName   = scans{scanNum};
-    MScan_crop = MScans{scanNum};
+    Mscan_crop = Mscans{scanNum};
     
-    % Compute Average A-Scan Magnitude (in dB)
-    avg_A_scan = mean(20*log10(abs(MScan_crop)), 2);
+    % Compute Average Ascan Magnitude (in dB)
+    avg_Ascan = mean(20*log10(abs(Mscan_crop)), 2);
     
     % Detect peaks within the specified depth range
-    [pks, locs] = findpeaks(avg_A_scan(depth_range_idx), z(depth_range_idx), ...
+    [pks, locs] = findpeaks(avg_Ascan(depth_range_idx), z(depth_range_idx), ...
                               'MinPeakHeight', -5, 'MinPeakDistance', 0.1 * 1e-3);
     % Convert peak locations (in depth) to pixel indices
     pixel_idx = round(locs / dz);
     
-    fprintf('Average A-Scan Peaks (%s):\n', scanName);
+    fprintf('Average Ascan Peaks (%s):\n', scanName);
     for i = 1:min(2, length(pks))
         fprintf('  Peak %d: %.2f dB at %.2f mm (Pixel %d)\n', i, pks(i), locs(i)*1e3, pixel_idx(i));
     end
     
-    % Plot the average A-scan with the detected peaks
-    figure("Name", sprintf("Average A-Scan Magnitude (%s)", scanName));
-    plot(z * 1e3, avg_A_scan); hold on;
+    % Plot the average Ascan with the detected peaks
+    figure("Name", sprintf("Average Ascan Magnitude (%s)", scanName));
+    plot(z * 1e3, avg_Ascan); hold on;
     plot(locs * 1e3, pks, 'bv', 'MarkerFaceColor', 'b');
     xlabel('Depth [mm]');
     ylabel('Magnitude [dB]');
     axis tight;
-    exportgraphics(gcf, sprintf('figures/A_Scan_Magnitude_%s.png', scanName), 'Resolution', 300);
+    exportgraphics(gcf, sprintf('figures/Ascan_Magnitude_%s.png', scanName), 'Resolution', 300);
     
     %% Loop Over the First Two Detected Peaks and Analyze Each
     for peakIdx = 1:min(2, length(pks))
         pixel = pixel_idx(peakIdx);
         % Extract the time series at the selected pixel row
-        time_series = MScan_crop(pixel, :);
+        time_series = Mscan_crop(pixel, :);
         
         % Unwrap the phase of the complex time series
         phase_unwrapped = unwrap(angle(time_series));
