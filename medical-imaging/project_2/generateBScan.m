@@ -4,15 +4,15 @@ function [B_scan, timing] = generateBScan(detector_current, N_axial, D, L2K, do_
     detector_current_reshaped   = reshape(detector_current, N_axial, []);
 
     if verbose
-        figure("Name", "B-Scan Processing Steps");
-        steps_fig = tiledlayout('vertical');
+        processing_fig = figure("Name", "B-Scan Processing Steps");
+        steps_fig = tiledlayout(processing_fig, 'vertical');
         nexttile(steps_fig);
         plot(detector_current_reshaped(:,D+1));
         axis tight;
         title('Detector Current');
 
-        figure("Name", "Detector Current");
-        detector_current_fig = tiledlayout(2, 1);
+        detector_fig = figure("Name", "Detector Current");
+        detector_current_fig = tiledlayout(detector_fig, 2, 1);
         nexttile(detector_current_fig);
         plot(detector_current_reshaped(:,1));
         axis tight;
@@ -21,6 +21,7 @@ function [B_scan, timing] = generateBScan(detector_current, N_axial, D, L2K, do_
         plot(detector_current_reshaped(:,D+1));
         axis tight;
         title('Detector Current - Imaging Scan');
+        exportgraphics(detector_fig, 'figures/Detector_Current.png', 'Resolution', 300);
     end
 
     %% 1. Convert Raw Data from Lambda to k Domain
@@ -96,5 +97,7 @@ function [B_scan, timing] = generateBScan(detector_current, N_axial, D, L2K, do_
         plot(abs(B_scan(:,1)));
         axis tight;
         title('B-Scan - FFT Result');
+        processing_fig.Position = [100, 100, 560, 420 * 3];
+        exportgraphics(processing_fig, 'figures/B_Scan_Processing.png', 'Resolution', 300);
     end
 end

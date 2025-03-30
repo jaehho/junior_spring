@@ -1,9 +1,9 @@
 #import "conf.typ": ieee
 
 #show: ieee.with(
-  title: [Passive High-Pass Filter],
+  title: [Extracting Images and Displacements from Raw Spectral Domain Optical Coherence Tomography Data],
   abstract: [
-    
+    #lorem(30),
   ],
   index-terms: ("",),
   authors: (
