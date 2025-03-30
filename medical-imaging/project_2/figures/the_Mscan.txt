@@ -1,0 +1,306 @@
+L2K conversion time: 1.7940 sec
+Background subtraction time: 0.1394 sec
+Windowing time: 0.1385 sec
+Deconvolution time: 0.1357 sec
+FFT time: 0.2259 sec
+L2K conversion time: 1.9047 sec
+Background subtraction time: 0.1355 sec
+Windowing time: 0.1360 sec
+Deconvolution time: 0.1398 sec
+FFT time: 0.2301 sec
+Average Ascan Peaks (Mscan1):
+  Peak 1: 0.32 dB at 0.22 mm (Pixel 61)
+  Peak 2: -1.38 dB at 0.34 mm (Pixel 94)
+Displacement Frequency Peaks (Mscan1, Peak 1):
+  Peak 1: 110.32 dB at 4.01 kHz
+Displacement Frequency Peaks (Mscan1, Peak 2):
+  Peak 1: 110.47 dB at 4.01 kHz
+Average Ascan Peaks (Mscan40):
+  Peak 1: -0.28 dB at 0.22 mm (Pixel 61)
+  Peak 2: -1.00 dB at 0.32 mm (Pixel 89)
+Displacement Frequency Peaks (Mscan40, Peak 1):
+  Peak 1: 124.93 dB at 2.58 kHz
+  Peak 2: 123.78 dB at 2.68 kHz
+  Peak 3: 112.65 dB at 3.73 kHz
+  Peak 4: 109.10 dB at 4.07 kHz
+  Peak 5: 109.88 dB at 4.12 kHz
+  Peak 6: 113.77 dB at 5.22 kHz
+  Peak 7: 115.70 dB at 5.35 kHz
+  Peak 8: 117.06 dB at 5.64 kHz
+  Peak 9: 116.14 dB at 6.58 kHz
+  Peak 10: 115.45 dB at 6.62 kHz
+  Peak 11: 109.88 dB at 6.83 kHz
+  Peak 12: 107.12 dB at 7.33 kHz
+  Peak 13: 108.19 dB at 7.37 kHz
+  Peak 14: 110.75 dB at 8.94 kHz
+  Peak 15: 110.68 dB at 9.02 kHz
+  Peak 16: 103.01 dB at 9.43 kHz
+  Peak 17: 106.41 dB at 10.69 kHz
+  Peak 18: 106.34 dB at 11.44 kHz
+  Peak 19: 110.81 dB at 12.14 kHz
+  Peak 20: 105.31 dB at 12.76 kHz
+  Peak 21: 109.49 dB at 13.47 kHz
+  Peak 22: 114.27 dB at 14.70 kHz
+  Peak 23: 117.47 dB at 14.94 kHz
+  Peak 24: 110.87 dB at 15.30 kHz
+  Peak 25: 118.48 dB at 16.23 kHz
+  Peak 26: 117.91 dB at 16.28 kHz
+  Peak 27: 94.81 dB at 16.96 kHz
+  Peak 28: 104.12 dB at 17.63 kHz
+  Peak 29: 103.47 dB at 17.83 kHz
+  Peak 30: 120.19 dB at 18.77 kHz
+  Peak 31: 113.30 dB at 19.19 kHz
+  Peak 32: 114.34 dB at 19.36 kHz
+  Peak 33: 106.89 dB at 20.51 kHz
+  Peak 34: 103.40 dB at 20.70 kHz
+  Peak 35: 101.98 dB at 20.71 kHz
+  Peak 36: 102.04 dB at 20.82 kHz
+  Peak 37: 104.77 dB at 21.18 kHz
+  Peak 38: 110.26 dB at 21.49 kHz
+  Peak 39: 105.97 dB at 22.33 kHz
+  Peak 40: 106.10 dB at 22.40 kHz
+Displacement Frequency Peaks (Mscan40, Peak 2):
+  Peak 1: 125.32 dB at 2.58 kHz
+  Peak 2: 124.18 dB at 2.68 kHz
+  Peak 3: 112.89 dB at 3.73 kHz
+  Peak 4: 109.31 dB at 4.07 kHz
+  Peak 5: 110.17 dB at 4.12 kHz
+  Peak 6: 114.18 dB at 5.22 kHz
+  Peak 7: 116.02 dB at 5.35 kHz
+  Peak 8: 117.40 dB at 5.64 kHz
+  Peak 9: 116.47 dB at 6.58 kHz
+  Peak 10: 115.78 dB at 6.62 kHz
+  Peak 11: 110.18 dB at 6.83 kHz
+  Peak 12: 107.02 dB at 7.33 kHz
+  Peak 13: 108.60 dB at 7.37 kHz
+  Peak 14: 110.86 dB at 8.94 kHz
+  Peak 15: 111.01 dB at 9.02 kHz
+  Peak 16: 103.24 dB at 9.43 kHz
+  Peak 17: 106.50 dB at 10.69 kHz
+  Peak 18: 106.26 dB at 11.44 kHz
+  Peak 19: 110.90 dB at 12.14 kHz
+  Peak 20: 105.62 dB at 12.76 kHz
+  Peak 21: 109.57 dB at 13.47 kHz
+  Peak 22: 114.62 dB at 14.70 kHz
+  Peak 23: 117.80 dB at 14.94 kHz
+  Peak 24: 111.24 dB at 15.30 kHz
+  Peak 25: 118.57 dB at 16.23 kHz
+  Peak 26: 118.09 dB at 16.28 kHz
+  Peak 27: 94.19 dB at 16.96 kHz
+  Peak 28: 104.73 dB at 17.63 kHz
+  Peak 29: 103.43 dB at 17.83 kHz
+  Peak 30: 120.40 dB at 18.77 kHz
+  Peak 31: 113.49 dB at 19.19 kHz
+  Peak 32: 114.47 dB at 19.36 kHz
+  Peak 33: 106.92 dB at 20.51 kHz
+  Peak 34: 103.86 dB at 20.70 kHz
+  Peak 35: 102.03 dB at 20.71 kHz
+  Peak 36: 102.47 dB at 20.82 kHz
+  Peak 37: 105.25 dB at 21.18 kHz
+  Peak 38: 110.61 dB at 21.49 kHz
+  Peak 39: 106.40 dB at 22.33 kHz
+  Peak 40: 106.39 dB at 22.40 kHz
+L2K conversion time: 1.7298 sec
+Background subtraction time: 0.1334 sec
+Windowing time: 0.1347 sec
+Deconvolution time: 0.1355 sec
+FFT time: 0.2261 sec
+L2K conversion time: 1.9274 sec
+Background subtraction time: 0.1362 sec
+Windowing time: 0.1366 sec
+Deconvolution time: 0.1363 sec
+FFT time: 0.2327 sec
+Average Ascan Peaks (Mscan1):
+  Peak 1: 0.32 dB at 0.22 mm (Pixel 61)
+  Peak 2: -1.38 dB at 0.34 mm (Pixel 94)
+Displacement Frequency Peaks (Mscan1, Peak 1):
+  Peak 1: 110.32 dB at 4.01 kHz
+Displacement Frequency Peaks (Mscan1, Peak 2):
+  Peak 1: 110.47 dB at 4.01 kHz
+Average Ascan Peaks (Mscan40):
+  Peak 1: -0.28 dB at 0.22 mm (Pixel 61)
+  Peak 2: -1.00 dB at 0.32 mm (Pixel 89)
+Displacement Frequency Peaks (Mscan40, Peak 1):
+  Peak 1: 124.93 dB at 2.58 kHz
+  Peak 2: 123.78 dB at 2.68 kHz
+  Peak 3: 112.65 dB at 3.73 kHz
+  Peak 4: 109.10 dB at 4.07 kHz
+  Peak 5: 109.88 dB at 4.12 kHz
+  Peak 6: 113.77 dB at 5.22 kHz
+  Peak 7: 115.70 dB at 5.35 kHz
+  Peak 8: 117.06 dB at 5.64 kHz
+  Peak 9: 116.14 dB at 6.58 kHz
+  Peak 10: 115.45 dB at 6.62 kHz
+  Peak 11: 109.88 dB at 6.83 kHz
+  Peak 12: 107.12 dB at 7.33 kHz
+  Peak 13: 108.19 dB at 7.37 kHz
+  Peak 14: 110.75 dB at 8.94 kHz
+  Peak 15: 110.68 dB at 9.02 kHz
+  Peak 16: 103.01 dB at 9.43 kHz
+  Peak 17: 106.41 dB at 10.69 kHz
+  Peak 18: 106.34 dB at 11.44 kHz
+  Peak 19: 110.81 dB at 12.14 kHz
+  Peak 20: 105.31 dB at 12.76 kHz
+  Peak 21: 109.49 dB at 13.47 kHz
+  Peak 22: 114.27 dB at 14.70 kHz
+  Peak 23: 117.47 dB at 14.94 kHz
+  Peak 24: 110.87 dB at 15.30 kHz
+  Peak 25: 118.48 dB at 16.23 kHz
+  Peak 26: 117.91 dB at 16.28 kHz
+  Peak 27: 94.81 dB at 16.96 kHz
+  Peak 28: 104.12 dB at 17.63 kHz
+  Peak 29: 103.47 dB at 17.83 kHz
+  Peak 30: 120.19 dB at 18.77 kHz
+  Peak 31: 113.30 dB at 19.19 kHz
+  Peak 32: 114.34 dB at 19.36 kHz
+  Peak 33: 106.89 dB at 20.51 kHz
+  Peak 34: 103.40 dB at 20.70 kHz
+  Peak 35: 101.98 dB at 20.71 kHz
+  Peak 36: 102.04 dB at 20.82 kHz
+  Peak 37: 104.77 dB at 21.18 kHz
+  Peak 38: 110.26 dB at 21.49 kHz
+  Peak 39: 105.97 dB at 22.33 kHz
+  Peak 40: 106.10 dB at 22.40 kHz
+Displacement Frequency Peaks (Mscan40, Peak 2):
+  Peak 1: 125.32 dB at 2.58 kHz
+  Peak 2: 124.18 dB at 2.68 kHz
+  Peak 3: 112.89 dB at 3.73 kHz
+  Peak 4: 109.31 dB at 4.07 kHz
+  Peak 5: 110.17 dB at 4.12 kHz
+  Peak 6: 114.18 dB at 5.22 kHz
+  Peak 7: 116.02 dB at 5.35 kHz
+  Peak 8: 117.40 dB at 5.64 kHz
+  Peak 9: 116.47 dB at 6.58 kHz
+  Peak 10: 115.78 dB at 6.62 kHz
+  Peak 11: 110.18 dB at 6.83 kHz
+  Peak 12: 107.02 dB at 7.33 kHz
+  Peak 13: 108.60 dB at 7.37 kHz
+  Peak 14: 110.86 dB at 8.94 kHz
+  Peak 15: 111.01 dB at 9.02 kHz
+  Peak 16: 103.24 dB at 9.43 kHz
+  Peak 17: 106.50 dB at 10.69 kHz
+  Peak 18: 106.26 dB at 11.44 kHz
+  Peak 19: 110.90 dB at 12.14 kHz
+  Peak 20: 105.62 dB at 12.76 kHz
+  Peak 21: 109.57 dB at 13.47 kHz
+  Peak 22: 114.62 dB at 14.70 kHz
+  Peak 23: 117.80 dB at 14.94 kHz
+  Peak 24: 111.24 dB at 15.30 kHz
+  Peak 25: 118.57 dB at 16.23 kHz
+  Peak 26: 118.09 dB at 16.28 kHz
+  Peak 27: 94.19 dB at 16.96 kHz
+  Peak 28: 104.73 dB at 17.63 kHz
+  Peak 29: 103.43 dB at 17.83 kHz
+  Peak 30: 120.40 dB at 18.77 kHz
+  Peak 31: 113.49 dB at 19.19 kHz
+  Peak 32: 114.47 dB at 19.36 kHz
+  Peak 33: 106.92 dB at 20.51 kHz
+  Peak 34: 103.86 dB at 20.70 kHz
+  Peak 35: 102.03 dB at 20.71 kHz
+  Peak 36: 102.47 dB at 20.82 kHz
+  Peak 37: 105.25 dB at 21.18 kHz
+  Peak 38: 110.61 dB at 21.49 kHz
+  Peak 39: 106.40 dB at 22.33 kHz
+  Peak 40: 106.39 dB at 22.40 kHz
+L2K conversion time: 1.9946 sec
+Background subtraction time: 0.1350 sec
+Windowing time: 0.1344 sec
+Deconvolution time: 0.1349 sec
+FFT time: 0.2257 sec
+L2K conversion time: 1.9284 sec
+Background subtraction time: 0.1367 sec
+Windowing time: 0.1376 sec
+Deconvolution time: 0.1365 sec
+FFT time: 0.2303 sec
+Average Ascan Peaks (Mscan1):
+  Peak 1: 0.32 dB at 0.22 mm (Pixel 61)
+  Peak 2: -1.38 dB at 0.34 mm (Pixel 94)
+Displacement Frequency Peaks (Mscan1, Peak 1):
+  Peak 1: 110.32 dB at 4.01 kHz
+Displacement Frequency Peaks (Mscan1, Peak 2):
+  Peak 1: 110.47 dB at 4.01 kHz
+Average Ascan Peaks (Mscan40):
+  Peak 1: -0.28 dB at 0.22 mm (Pixel 61)
+  Peak 2: -1.00 dB at 0.32 mm (Pixel 89)
+Displacement Frequency Peaks (Mscan40, Peak 1):
+  Peak 1: 124.93 dB at 2.58 kHz
+  Peak 2: 123.78 dB at 2.68 kHz
+  Peak 3: 112.65 dB at 3.73 kHz
+  Peak 4: 109.10 dB at 4.07 kHz
+  Peak 5: 109.88 dB at 4.12 kHz
+  Peak 6: 113.77 dB at 5.22 kHz
+  Peak 7: 115.70 dB at 5.35 kHz
+  Peak 8: 117.06 dB at 5.64 kHz
+  Peak 9: 116.14 dB at 6.58 kHz
+  Peak 10: 115.45 dB at 6.62 kHz
+  Peak 11: 109.88 dB at 6.83 kHz
+  Peak 12: 107.12 dB at 7.33 kHz
+  Peak 13: 108.19 dB at 7.37 kHz
+  Peak 14: 110.75 dB at 8.94 kHz
+  Peak 15: 110.68 dB at 9.02 kHz
+  Peak 16: 103.01 dB at 9.43 kHz
+  Peak 17: 106.41 dB at 10.69 kHz
+  Peak 18: 106.34 dB at 11.44 kHz
+  Peak 19: 110.81 dB at 12.14 kHz
+  Peak 20: 105.31 dB at 12.76 kHz
+  Peak 21: 109.49 dB at 13.47 kHz
+  Peak 22: 114.27 dB at 14.70 kHz
+  Peak 23: 117.47 dB at 14.94 kHz
+  Peak 24: 110.87 dB at 15.30 kHz
+  Peak 25: 118.48 dB at 16.23 kHz
+  Peak 26: 117.91 dB at 16.28 kHz
+  Peak 27: 94.81 dB at 16.96 kHz
+  Peak 28: 104.12 dB at 17.63 kHz
+  Peak 29: 103.47 dB at 17.83 kHz
+  Peak 30: 120.19 dB at 18.77 kHz
+  Peak 31: 113.30 dB at 19.19 kHz
+  Peak 32: 114.34 dB at 19.36 kHz
+  Peak 33: 106.89 dB at 20.51 kHz
+  Peak 34: 103.40 dB at 20.70 kHz
+  Peak 35: 101.98 dB at 20.71 kHz
+  Peak 36: 102.04 dB at 20.82 kHz
+  Peak 37: 104.77 dB at 21.18 kHz
+  Peak 38: 110.26 dB at 21.49 kHz
+  Peak 39: 105.97 dB at 22.33 kHz
+  Peak 40: 106.10 dB at 22.40 kHz
+Displacement Frequency Peaks (Mscan40, Peak 2):
+  Peak 1: 125.32 dB at 2.58 kHz
+  Peak 2: 124.18 dB at 2.68 kHz
+  Peak 3: 112.89 dB at 3.73 kHz
+  Peak 4: 109.31 dB at 4.07 kHz
+  Peak 5: 110.17 dB at 4.12 kHz
+  Peak 6: 114.18 dB at 5.22 kHz
+  Peak 7: 116.02 dB at 5.35 kHz
+  Peak 8: 117.40 dB at 5.64 kHz
+  Peak 9: 116.47 dB at 6.58 kHz
+  Peak 10: 115.78 dB at 6.62 kHz
+  Peak 11: 110.18 dB at 6.83 kHz
+  Peak 12: 107.02 dB at 7.33 kHz
+  Peak 13: 108.60 dB at 7.37 kHz
+  Peak 14: 110.86 dB at 8.94 kHz
+  Peak 15: 111.01 dB at 9.02 kHz
+  Peak 16: 103.24 dB at 9.43 kHz
+  Peak 17: 106.50 dB at 10.69 kHz
+  Peak 18: 106.26 dB at 11.44 kHz
+  Peak 19: 110.90 dB at 12.14 kHz
+  Peak 20: 105.62 dB at 12.76 kHz
+  Peak 21: 109.57 dB at 13.47 kHz
+  Peak 22: 114.62 dB at 14.70 kHz
+  Peak 23: 117.80 dB at 14.94 kHz
+  Peak 24: 111.24 dB at 15.30 kHz
+  Peak 25: 118.57 dB at 16.23 kHz
+  Peak 26: 118.09 dB at 16.28 kHz
+  Peak 27: 94.19 dB at 16.96 kHz
+  Peak 28: 104.73 dB at 17.63 kHz
+  Peak 29: 103.43 dB at 17.83 kHz
+  Peak 30: 120.40 dB at 18.77 kHz
+  Peak 31: 113.49 dB at 19.19 kHz
+  Peak 32: 114.47 dB at 19.36 kHz
+  Peak 33: 106.92 dB at 20.51 kHz
+  Peak 34: 103.86 dB at 20.70 kHz
+  Peak 35: 102.03 dB at 20.71 kHz
+  Peak 36: 102.47 dB at 20.82 kHz
+  Peak 37: 105.25 dB at 21.18 kHz
+  Peak 38: 110.61 dB at 21.49 kHz
+  Peak 39: 106.40 dB at 22.33 kHz
+  Peak 40: 106.39 dB at 22.40 kHz

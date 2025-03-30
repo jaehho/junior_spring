@@ -26,10 +26,14 @@ depth_upper = 0.5;  % in mm
 % Since z is in meters and dz is in meters, convert mm->m by dividing by 1e3
 depth_range_idx = round(depth_lower/1e3/dz):round(depth_upper/1e3/dz);
 
-%% Loop Over Both Mscans
+%% Define scans and corresponding data
 scans    = {'Mscan1', 'Mscan40'};
 Mscans   = {Mscan_M1_cropped, Mscan_M40_cropped};
 timings  = {timing_M1, timing_M40};  % if needed later
+
+%% ----- Average Ascan Magnitude Plots for Both Scans in One Figure -----
+figure("Name", "Average Ascan Magnitude (Both Scans)");
+tlo_avg = tiledlayout(length(scans), 1);  % one row, one column per scan
 
 for scanNum = 1:length(scans)
     scanName   = scans{scanNum};
@@ -49,17 +53,21 @@ for scanNum = 1:length(scans)
         fprintf('  Peak %d: %.2f dB at %.2f mm (Pixel %d)\n', i, pks(i), locs(i)*1e3, pixel_idx(i));
     end
     
-    % Plot the average Ascan with the detected peaks
-    figure("Name", sprintf("Average Ascan Magnitude (%s)", scanName));
+    % Plot the average Ascan in the next tile
+    nexttile(tlo_avg);
     plot(z * 1e3, avg_Ascan); hold on;
     plot(locs * 1e3, pks, 'bv', 'MarkerFaceColor', 'b');
     xlabel('Depth [mm]');
     ylabel('Magnitude [dB]');
+    title(sprintf('Average Ascan (%s)', scanName));
     axis tight;
-    exportgraphics(gcf, sprintf('figures/Ascan_Magnitude_%s.png', scanName), 'Resolution', 300);
     
-    %% Loop Over the First Two Detected Peaks and Analyze Each
-    for peakIdx = 1:min(2, length(pks))
+    %% ----- Displacement vs. Time Plots for Selected Pixels (Grouped) -----
+    numPeaks = min(2, length(pks));  % Use only the first two detected peaks
+    figure("Name", sprintf("Displacement vs. Time (%s)", scanName));
+    tlo_disp = tiledlayout(numPeaks, 1);  % Update to one column, multiple rows for peaks
+    
+    for peakIdx = 1:numPeaks
         pixel = pixel_idx(peakIdx);
         % Extract the time series at the selected pixel row
         time_series = Mscan_crop(pixel, :);
@@ -73,41 +81,55 @@ for scanNum = 1:length(scans)
         % Correct initial artifact by removing transient samples
         transient_samples = round(0.0015 * fs);
         displacement_corrected = displacement(transient_samples+1:end);
-
+    
         t = (0:length(displacement_corrected)-1) * dt;
         
-        % Plot Displacement vs. Time
-        figure("Name", sprintf("Displacement vs. Time (%s, Peak %d)", scanName, peakIdx));
+        nexttile(tlo_disp);
         plot(t, displacement_corrected);
         xlabel('Time [s]');
         ylabel('Displacement [nm]');
+        title(sprintf('Peak %d (Pixel %d)', peakIdx, pixel));
         axis tight;
-        exportgraphics(gcf, sprintf('figures/Displacement_Time_%s_Peak%d.png', scanName, peakIdx), 'Resolution', 300);
         
-        % SDPM
+        %% ----- Displacement Frequency Spectrum Plots for Each Peak (Grouped) -----
+        % We compute the FFT for the current displacement_corrected.
         N_samples = length(displacement_corrected);
         f = ((0:N_samples-1) / (N_samples * dt)) / 2;
-
-        displacement_fft_dB = (20*log10(abs(fft(displacement_corrected))));
-
-        displacement_fft_dB_half = displacement_fft_dB(1:floor(N_samples/2)+1);
-        f_half = f(1:floor(N_samples/2)+1);
-        f_threshold = 0.15 * 1e3; % kHz
+    
+        displacement_fft = fft(displacement_corrected);
+        displacement_fft_dB = 20*log10(abs(displacement_fft));
+    
+        % Use only the first half of the FFT result
+        half_idx = floor(N_samples/2)+1;
+        displacement_fft_dB_half = displacement_fft_dB(1:half_idx);
+        f_half = f(1:half_idx);
+        
+        % Define ROI for peak detection in frequency domain
+        f_threshold = 0.15 * 1e3; % threshold in Hz
         f_roi_idx = find(f_half >= f_threshold, 1);
-
-        [pks, locs] = findpeaks(displacement_fft_dB_half(f_roi_idx:end), f_half(f_roi_idx:end), 'MinPeakHeight', 90, 'MinPeakProminence', 10);
+    
+        [pks_fft, locs_fft] = findpeaks(displacement_fft_dB_half(f_roi_idx:end), f_half(f_roi_idx:end), ...
+                                        'MinPeakHeight', 90, 'MinPeakProminence', 10);
         fprintf('Displacement Frequency Peaks (%s, Peak %d):\n', scanName, peakIdx);
-        for i = 1:length(pks)
-            fprintf('  Peak %d: %.2f dB at %.2f kHz\n', i, pks(i), locs(i) * 1e-3);
+        for i = 1:length(pks_fft)
+            fprintf('  Peak %d: %.2f dB at %.2f kHz\n', i, pks_fft(i), locs_fft(i) * 1e-3);
         end
         
-        figure("Name", sprintf("Displacement Frequency Spectrum (%s, Peak %d)", scanName, peakIdx));
+        % Create (or update) a grouped figure for frequency spectra for this scan.
+        % If first peak, open a new figure.
+        if peakIdx == 1
+            figure("Name", sprintf("Displacement Frequency Spectrum (%s)", scanName));
+            tlo_freq = tiledlayout(numPeaks, 1);  % Update to one column, multiple rows for frequency peaks
+        end
+        
+        nexttile(tlo_freq);
         plot(f_half * 1e-3, displacement_fft_dB_half); hold on;
-        plot(locs * 1e-3, pks, 'bv', 'MarkerFaceColor', 'b');
+        plot(locs_fft * 1e-3, pks_fft, 'bv', 'MarkerFaceColor', 'b');
         xlabel('Frequency [kHz]');
         ylabel('Amplitude [dB]');
+        title(sprintf('Peak %d (Pixel %d)', peakIdx, pixel));
         axis tight;
-        exportgraphics(gcf, sprintf('figures/Displacement_Freq_%s_Peak%d.png', scanName, peakIdx), 'Resolution', 300);
     end
 end
+
 diary off;
