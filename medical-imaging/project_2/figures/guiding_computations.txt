@@ -1,0 +1,11 @@
+Bscan_Layers.raw: 10175 total columns, 175 background, 10000 Ascans
+Mscan1.raw: 104768 total columns, 320 background, 104448 Ascans
+Mscan40.raw: 106816 total columns, 320 background, 106496 Ascans
+--- OCT System Resolution and Geometry ---
+           Lateral Resolution : 8.81 µm
+             Axial Resolution : 7.57 µm
+           Lateral Pixel Size : 0.10 µm
+  Axial Range w/ Mirror Image : 7.37 mm
+ Axial Range w/o Mirror Image : 3.69 mm
+ Aspect Ratio w/ Mirror Image : 1/7 = 0.136
+Aspect Ratio w/o Mirror Image : 1/4 = 0.271

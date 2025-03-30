@@ -1,5 +1,5 @@
 clc; clear; close all;
-fclose(fopen('figures/logfile.txt', 'w'));
+fclose(fopen('figures/the_Ascan.txt', 'w'));
 diary('figures/the_Ascan.txt'); % Start logging to a file
 diary on;
 
@@ -37,7 +37,7 @@ Ascan_M40 = Bscan_M40(:, round((size(Bscan_M40, 2) + D_Mscan) / 2) + 1);
 %% Plot
 z = (-N_axial/2:N_axial/2-1);
 figure("Name", "Ascans");
-t = tiledlayout(2,2, 'TileSpacing','none', 'Padding','Compact');
+tlo = tiledlayout(2,2, 'TileSpacing', "none", 'Padding','tight');
 
 ax1 = nexttile;
 plot(z, 20*log10(abs(fftshift(Ascan_B1))));
@@ -46,20 +46,22 @@ text(0.05, 0.95, 'A', 'Units', 'normalized', ...
     'HorizontalAlignment', 'left', 'VerticalAlignment', 'top');
 
 ax2 = nexttile;
-plot(z, 20*log10(abs(fftshift(Ascan_BMid))));
-axis tight;
-text(0.05, 0.95, 'B', 'Units', 'normalized', ...
-    'HorizontalAlignment', 'left', 'VerticalAlignment', 'top');
-
-ax3 = nexttile;
 plot(z, 20*log10(abs(fftshift(Ascan_M1))));
 axis tight;
 text(0.05, 0.95, 'C', 'Units', 'normalized', ...
     'HorizontalAlignment', 'left', 'VerticalAlignment', 'top');
 
+ax3 = nexttile;
+plot(z, 20*log10(abs(fftshift(Ascan_BMid))));
+axis tight;
+xticks([-500 0 500]);
+text(0.05, 0.95, 'B', 'Units', 'normalized', ...
+    'HorizontalAlignment', 'left', 'VerticalAlignment', 'top');
+
 ax4 = nexttile;
 plot(z, 20*log10(abs(fftshift(Ascan_M40))));
 axis tight;
+xticks([-500 0 500]);
 text(0.05, 0.95, 'D', 'Units', 'normalized', ...
     'HorizontalAlignment', 'left', 'VerticalAlignment', 'top');
 
@@ -73,17 +75,17 @@ ax2.YTickLabel = [];
 ax4.YTickLabel = [];
 
 % Add common x and y labels for the entire tiled layout:
-xlabel(t, 'Depth Index');
-ylabel(t, 'Magnitude [dB]');
+xlabel(tlo, 'Pixel Depth');
+ylabel(tlo, 'Magnitude [dB]');
 
 exportgraphics(gcf, 'figures/Ascans.png', 'Resolution', 300);
 
 figure("Name", "Ascan Processing Comparison");
-plot(z, 20*log10(abs(fftshift(Ascan_BMid))), z, 20*log10(abs(fftshift(Ascan_BMid_no_deconv_no_bgs))), z, 20*log10(abs(fftshift(Ascan_BMid_no_deconv))));
+plot(z, 20*log10(abs(fftshift(Ascan_BMid_no_deconv_no_bgs))), z, 20*log10(abs(fftshift(Ascan_BMid_no_deconv))), z, 20*log10(abs(fftshift(Ascan_BMid))));
 axis tight;
-xlabel('Depth Index');
+xlabel('Pixel Depth');
 ylabel('Magnitude [dB]');
-legend({'Deconv + BG Subtract', 'No Deconv + No BG Subtract', 'No Deconv + BG Subtract'}, 'Fontsize', 6);
+legend({'No Deconv + No BG Subtract', 'No Deconv + BG Subtract', 'Deconv + BG Subtract'}, 'Fontsize', 6);
 legend('boxoff');
 exportgraphics(gcf, 'figures/Ascan_Processing_Comparison.png', 'Resolution', 300);
 

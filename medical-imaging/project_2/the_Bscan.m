@@ -1,5 +1,5 @@
 clc; clear; close all;
-fclose(fopen('figures/logfile.txt', 'w'));
+fclose(fopen('figures/the_Bscan.txt', 'w'));
 diary('figures/the_Bscan.txt'); % Start logging to a file
 diary on;
 
@@ -68,7 +68,7 @@ exportgraphics(gcf, 'figures/Ascan_Analysis_Bscan.png', 'Resolution', 300);
 x = linspace(0, Bscan_width, size(Bscan, 2)); % Lateral axis
 
 figure("Name", "Bscans");
-t = tiledlayout(1,4,'TileSpacing','none','Padding','Compact');
+tlo = tiledlayout(1,4,'TileSpacing','none','Padding','Compact');
 
 % Unprocessed Bscan
 ax1 = nexttile;
@@ -110,8 +110,8 @@ ax3.YTickLabel = [];
 ax4.YTickLabel = [];
 
 % Add common x and y labels for the entire tiled layout:
-xlabel(t, 'Lateral Position [mm]');
-ylabel(t, 'Depth [mm]');
+xlabel(tlo, 'Lateral Position [mm]');
+ylabel(tlo, 'Depth [mm]');
 
 exportgraphics(gcf, 'figures/Bscans.png', 'Resolution', 300);
 

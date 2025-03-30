@@ -13,7 +13,7 @@ function [Bscan, timing] = generate_Bscan(detector_current, N_axial, D, L2K, do_
         title('Detector Current');
 
         detector_fig = figure("Name", "Detector Current");
-        detector_current_fig = tiledlayout(detector_fig, 2, 1);
+        detector_current_fig = tiledlayout(detector_fig, 2, 1, "TileSpacing", "tight", "Padding", "tight");
         nexttile(detector_current_fig);
         plot(detector_current_reshaped(:,1));
         axis tight;

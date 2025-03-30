@@ -1,4 +1,7 @@
 clc; clear; close all;
+fclose(fopen('figures/guiding_computations.txt', 'w'));
+diary('figures/guiding_computations.txt'); % Start logging to a file
+diary on;
 
 % Load raw files
 Bscan_raw = loadRawFile('project-files/Bscan_Layers.raw');
@@ -54,3 +57,5 @@ fprintf('Aspect Ratio w/o Mirror Image : %d/%d = %.3f\n', ...
         round(Bscan_width * 1e3), round(depth_half * 1e3), aspect_ratio_corrected);
 % fprintf('Aspect Ratio w Mirror Image  : %.3f\n', aspect_ratio_full);
 % fprintf('Aspect Ratio w/ Mirror Image : %.3f\n', aspect_ratio_corrected);
+
+diary off;

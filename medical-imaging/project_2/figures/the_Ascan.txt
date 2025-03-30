@@ -1,63 +1,32 @@
 
 Processing Bscan_Layers.raw...
-L2K conversion time: 0.1877 sec
-Background subtraction time: 0.0127 sec
-Windowing time: 0.0144 sec
-Deconvolution time: 0.0143 sec
-FFT time: 0.0215 sec
+L2K conversion time: 0.1907 sec
+Background subtraction time: 0.0125 sec
+Windowing time: 0.0127 sec
+Deconvolution time: 0.0129 sec
+FFT time: 0.0217 sec
 
 Processing Bscan_Layers.raw with no deconvolution and no background subtraction...
-L2K conversion time: 0.2095 sec
-Windowing time: 0.0132 sec
-FFT time: 0.0221 sec
+L2K conversion time: 0.2386 sec
+Windowing time: 0.0128 sec
+FFT time: 0.0219 sec
 
 Processing Bscan_Layers.raw with no deconvolution...
-L2K conversion time: 0.1882 sec
-Background subtraction time: 0.0129 sec
-Windowing time: 0.0132 sec
-FFT time: 0.0219 sec
-
-Processing Mscan1.raw...
-L2K conversion time: 1.8668 sec
-Background subtraction time: 0.1335 sec
-Windowing time: 0.1335 sec
-Deconvolution time: 0.1373 sec
-FFT time: 0.2261 sec
-
-Processing Mscan40.raw...
-L2K conversion time: 1.9084 sec
-Background subtraction time: 0.1360 sec
-Windowing time: 0.1362 sec
-Deconvolution time: 0.1361 sec
-FFT time: 0.2303 sec
-L2K conversion time: 0.2196 sec
+L2K conversion time: 0.1849 sec
 Background subtraction time: 0.0127 sec
 Windowing time: 0.0130 sec
-Deconvolution time: 0.0129 sec
-FFT time: 0.0221 sec
-L2K conversion time: 0.2314 sec
-Background subtraction time: 0.0131 sec
-Windowing time: 0.0135 sec
-FFT time: 0.0219 sec
-Distances between peaks (mm):
-Peak 0.50 to Peak 0.53: 0.03 mm
-Peak 0.53 to Peak 0.58: 0.05 mm
-Peak 0.58 to Peak 0.61: 0.03 mm
-Peak 0.61 to Peak 0.67: 0.06 mm
-Peak 0.67 to Peak 0.69: 0.03 mm
-Peak 0.69 to Peak 0.75: 0.05 mm
-Peak 0.75 to Peak 0.77: 0.03 mm
-Peak 0.77 to Peak 0.83: 0.05 mm
-Peak 0.83 to Peak 0.85: 0.03 mm
-Peak 0.85 to Peak 0.91: 0.06 mm
-Peak 0.91 to Peak 0.94: 0.03 mm
-Peak 0.94 to Peak 0.99: 0.05 mm
-Peak 0.99 to Peak 1.02: 0.03 mm
-Peak 1.02 to Peak 1.07: 0.05 mm
-Peak 1.07 to Peak 1.09: 0.03 mm
-Peak 1.09 to Peak 1.15: 0.05 mm
-Peak 1.15 to Peak 1.17: 0.03 mm
-Peak 1.17 to Peak 1.23: 0.06 mm
-Peak 1.23 to Peak 1.26: 0.03 mm
-Peak 1.26 to Peak 1.31: 0.05 mm
-Peak 1.31 to Peak 1.32: 0.01 mm
+FFT time: 0.0217 sec
+
+Processing Mscan1.raw...
+L2K conversion time: 1.9041 sec
+Background subtraction time: 0.1331 sec
+Windowing time: 0.1345 sec
+Deconvolution time: 0.1337 sec
+FFT time: 0.2254 sec
+
+Processing Mscan40.raw...
+L2K conversion time: 1.8643 sec
+Background subtraction time: 0.1361 sec
+Windowing time: 0.1370 sec
+Deconvolution time: 0.1372 sec
+FFT time: 0.2309 sec
