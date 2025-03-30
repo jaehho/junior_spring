@@ -1,4 +1,7 @@
 clc; clear; close all;
+fclose(fopen('figures/logfile.txt', 'w'));
+diary('figures/the_Mscan.txt'); % Start logging to a file
+diary on;
 
 %% Load RAW Files and Parameters
 Mscan1_raw  = loadRawFile('project-files/Mscan1.raw');
@@ -107,3 +110,4 @@ for scanNum = 1:length(scans)
         exportgraphics(gcf, sprintf('figures/Displacement_Freq_%s_Peak%d.png', scanName, peakIdx), 'Resolution', 300);
     end
 end
+diary off;

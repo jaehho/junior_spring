@@ -1,4 +1,7 @@
 clc; clear; close all;
+fclose(fopen('figures/logfile.txt', 'w'));
+diary('figures/the_Ascan.txt'); % Start logging to a file
+diary on;
 
 %% Load RAW Files
 Bscan_raw   = loadRawFile('project-files/Bscan_Layers.raw');
@@ -83,3 +86,5 @@ ylabel('Magnitude [dB]');
 legend({'Deconv + BG Subtract', 'No Deconv + No BG Subtract', 'No Deconv + BG Subtract'}, 'Fontsize', 6);
 legend('boxoff');
 exportgraphics(gcf, 'figures/Ascan_Processing_Comparison.png', 'Resolution', 300);
+
+diary off;

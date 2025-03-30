@@ -1,4 +1,7 @@
 clc; clear; close all;
+fclose(fopen('figures/logfile.txt', 'w'));
+diary('figures/the_Bscan.txt'); % Start logging to a file
+diary on;
 
 %% Load RAW Files
 Bscan_raw = loadRawFile('project-files/Bscan_Layers.raw');
@@ -23,8 +26,8 @@ Bscan_cropped = Bscan_dB(1:N_half, :);
 Bscan_no_deconv_cropped = Bscan_no_deconv_dB(1:N_half, :);
 
 %% Ascan Analysis
-depth_lower = 0.45;
-depth_upper = 1.35;
+depth_lower = 0.5;
+depth_upper = 1.3;
 depth_range_idx = round(depth_lower / 1e3 / dz):round(depth_upper / 1e3 / dz);
 mag_upper = 10;
 mag_lower = -20;
@@ -36,6 +39,18 @@ fprintf('Distances between peaks (mm):\n');
 for i = 1:length(peak_distances)
     fprintf('Peak %.2f to Peak %.2f: %.2f mm\n', locs(i) * 1e3, locs(i+1) * 1e3, peak_distances(i));
 end
+small_distances = peak_distances(1:2:end);  % 1st, 3rd, 5th, ...
+large_distances = peak_distances(2:2:end);  % 2nd, 4th, 6th, ...
+
+% Compute averages
+avg_small = mean(small_distances);
+avg_large = mean(large_distances);
+
+% Display results
+fprintf('Average SMALL distance: %.4f mm\n', avg_small);
+fprintf('Average LARGE distance: %.4f mm\n', avg_large);
+
+%% Ascan Analysis Plot
 
 figure("Name", "Ascan Analysis for Bscan");
 plot(z * 1e3, Ascan_BMid); hold on;
@@ -53,7 +68,7 @@ exportgraphics(gcf, 'figures/Ascan_Analysis_Bscan.png', 'Resolution', 300);
 x = linspace(0, Bscan_width, size(Bscan, 2)); % Lateral axis
 
 figure("Name", "Bscans");
-t = tiledlayout(1,3,'TileSpacing','none','Padding','Compact');
+t = tiledlayout(1,4,'TileSpacing','none','Padding','Compact');
 
 % Unprocessed Bscan
 ax1 = nexttile;
@@ -80,10 +95,19 @@ axis image;
 text(0.1, 1, 'C', 'Units', 'normalized', 'Color', 'w', ...
     'HorizontalAlignment', 'left', 'VerticalAlignment', 'top');
 
+ax4 = nexttile;
+imagesc(x * 1e3, z * 1e3, Bscan_no_deconv_cropped);
+colormap(gray);
+clim([50 80]);
+axis image;
+text(0.1, 1, 'D', 'Units', 'normalized', 'Color', 'w', ...
+    'HorizontalAlignment', 'left', 'VerticalAlignment', 'top');
+
 % Link the axes so they share the same limits and tick locations:
-linkaxes([ax1, ax2, ax3],'y');
+linkaxes([ax1, ax2, ax3, ax4],'y');
 ax2.YTickLabel = [];
 ax3.YTickLabel = [];
+ax4.YTickLabel = [];
 
 % Add common x and y labels for the entire tiled layout:
 xlabel(t, 'Lateral Position [mm]');
@@ -101,3 +125,5 @@ xlabel('Lateral Position [mm]');
 ylabel('Depth [mm]');
 axis image;
 exportgraphics(gcf, 'figures/Bscan_Focused.png', 'Resolution', 300);
+
+diary off;
