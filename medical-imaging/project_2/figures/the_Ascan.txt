@@ -1,32 +1,32 @@
 
 Processing Bscan_Layers.raw...
-L2K conversion time: 0.1907 sec
-Background subtraction time: 0.0125 sec
-Windowing time: 0.0127 sec
-Deconvolution time: 0.0129 sec
-FFT time: 0.0217 sec
+L2K conversion time: 0.2087 sec
+Background subtraction time: 0.0133 sec
+Windowing time: 0.0250 sec
+Deconvolution time: 0.0257 sec
+FFT time: 0.0301 sec
 
 Processing Bscan_Layers.raw with no deconvolution and no background subtraction...
-L2K conversion time: 0.2386 sec
-Windowing time: 0.0128 sec
-FFT time: 0.0219 sec
+L2K conversion time: 0.2020 sec
+Windowing time: 0.0136 sec
+FFT time: 0.0222 sec
 
 Processing Bscan_Layers.raw with no deconvolution...
-L2K conversion time: 0.1849 sec
-Background subtraction time: 0.0127 sec
-Windowing time: 0.0130 sec
-FFT time: 0.0217 sec
+L2K conversion time: 0.1876 sec
+Background subtraction time: 0.0130 sec
+Windowing time: 0.0147 sec
+FFT time: 0.0220 sec
 
 Processing Mscan1.raw...
-L2K conversion time: 1.9041 sec
-Background subtraction time: 0.1331 sec
+L2K conversion time: 1.9198 sec
+Background subtraction time: 0.1337 sec
 Windowing time: 0.1345 sec
-Deconvolution time: 0.1337 sec
-FFT time: 0.2254 sec
+Deconvolution time: 0.1360 sec
+FFT time: 0.2259 sec
 
 Processing Mscan40.raw...
-L2K conversion time: 1.8643 sec
-Background subtraction time: 0.1361 sec
-Windowing time: 0.1370 sec
-Deconvolution time: 0.1372 sec
-FFT time: 0.2309 sec
+L2K conversion time: 1.9198 sec
+Background subtraction time: 0.1387 sec
+Windowing time: 0.1410 sec
+Deconvolution time: 0.1390 sec
+FFT time: 0.2332 sec

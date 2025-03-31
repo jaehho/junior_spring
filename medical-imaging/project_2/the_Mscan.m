@@ -37,6 +37,7 @@ tlo_avg = tiledlayout(length(scans), 1, "TileSpacing", "none", "Padding", "tight
 numPeaks = 2; % Number of peaks to analyze
 ax_avg = gobjects(length(scans));
 ax_fig_disp = gobjects(length(scans), numPeaks);
+ax_fig_zoom = gobjects(length(scans), numPeaks);
 ax_fig_fft = gobjects(length(scans), numPeaks);
 for scanNum = 1:length(scans)
     scanName   = scans{scanNum};
@@ -65,8 +66,13 @@ for scanNum = 1:length(scans)
     axis tight;
 
     %% ----- Displacement vs. Time -----
+    % Prepare for displacement vs. time figure
     fig_disp = figure("Name", sprintf("Displacement vs. Time (%s)", scanName));
     tlo_disp = tiledlayout(numPeaks, 1, "TileSpacing", "none", "Padding", "tight");
+    
+    % Prepare for zoomed displacement vs. time figure
+    fig_zoom = figure("Name", sprintf("Zoomed Displacement vs Time (%s)", scanName));
+    tlo_zoom = tiledlayout(numPeaks, 1, "TileSpacing", "none", "Padding", "tight");
     
     % Prepare for FFT figure
     fig_fft = figure("Name", sprintf("Displacement Frequency Spectrum (%s)", scanName));
@@ -88,6 +94,14 @@ for scanNum = 1:length(scans)
         text(0.01, 1, sprintf('%s', char('A' + (peakIdx - 1))), 'Units', 'normalized', ...
             'Color', 'k', 'HorizontalAlignment', 'left', 'VerticalAlignment', 'top');
         axis tight;
+        
+        % Plot zoomed-in view
+        ax_fig_zoom(scanNum, peakIdx) = nexttile(tlo_zoom);
+        plot(t * 1e3, displacement_nm_scaled); % time in ms
+        xlim([0 5]); 
+        % title(sprintf('Peak %d (Pixel %d)', peakIdx, pixel));
+        text(0.01, 1, sprintf('%s', char('A' + (peakIdx - 1))), 'Units', 'normalized', ...
+            'Color', 'k', 'HorizontalAlignment', 'left', 'VerticalAlignment', 'top');
 
         % FFT Spectrum
         N_samples = length(displacement_nm_scaled);
@@ -117,17 +131,22 @@ for scanNum = 1:length(scans)
     end
     % Link axes for displacement and FFT figures
     linkaxes([ax_fig_disp(scanNum, :)], 'xy');
+    linkaxes([ax_fig_zoom(scanNum, :)], 'xy');
     linkaxes([ax_fig_fft(scanNum, :)], 'xy');
     % Remove tick labels from interior axes to create a shared tick effect:
     ax_fig_disp(scanNum, 1).XTickLabel = [];
+    ax_fig_zoom(scanNum, 1).XTickLabel = [];
     ax_fig_fft(scanNum, 1).XTickLabel = [];
     % Add common x and y labels for the entire tiled layout:
     xlabel(tlo_disp, 'Time [s]');
     ylabel(tlo_disp, 'Displacement [nm]');
+    xlabel(tlo_zoom, 'Time [ms]');
+    ylabel(tlo_zoom, 'Displacement [nm]');
     xlabel(tlo_freq, 'Frequency [kHz]');
     ylabel(tlo_freq, 'Amplitude [dB]');
     % Save each scan's figures
     exportgraphics(fig_disp, sprintf('figures/Displacement_Time_%s.png', scanName), 'Resolution', 300);
+    exportgraphics(fig_zoom, sprintf('figures/Displacement_Time_Zoom_%s.png', scanName), 'Resolution', 300);
     exportgraphics(fig_fft, sprintf('figures/Displacement_Freq_%s.png', scanName), 'Resolution', 300);
 end
 

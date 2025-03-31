@@ -1,14 +1,13 @@
-the_Mscan
-L2K conversion time: 1.8691 sec
-Background subtraction time: 0.1347 sec
-Windowing time: 0.1348 sec
-Deconvolution time: 0.1346 sec
-FFT time: 0.2262 sec
-L2K conversion time: 1.8958 sec
-Background subtraction time: 0.1365 sec
-Windowing time: 0.1367 sec
-Deconvolution time: 0.1367 sec
-FFT time: 0.2303 sec
+L2K conversion time: 1.9031 sec
+Background subtraction time: 0.1332 sec
+Windowing time: 0.1343 sec
+Deconvolution time: 0.1376 sec
+FFT time: 0.2257 sec
+L2K conversion time: 1.8668 sec
+Background subtraction time: 0.1381 sec
+Windowing time: 0.1377 sec
+Deconvolution time: 0.1360 sec
+FFT time: 0.2305 sec
 Average Ascan Peaks (Mscan1):
   Peak 1: 0.32 dB at 0.22 mm (Pixel 61)
   Peak 2: -1.38 dB at 0.34 mm (Pixel 94)
