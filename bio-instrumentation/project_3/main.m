@@ -27,30 +27,26 @@ fprintf('Cpp_1 = %.4f nF\n', Cpp_1 * 1e9);
 fprintf('Lpp_2 = %.4f mH\n', Lpp_2 * 1e3);
 fprintf('Cpp_3 = %.4f nF\n', Cpp_3 * 1e9);
 
+% Load Measured Data
 freq_resp = processGainData('assets/meas_resp.csv', 'assets/freq_resp.csv');
 
-% Plot Frequency Response (Linear Gain)
-figure;
-semilogx(freq_resp.Frequency, freq_resp.dB_Gain, '.-','LineWidth', 1.5);
-xlabel('Frequency (Hz)');
-ylabel('Gain (dB)');
-title('Frequency Response (dB Gain)');
-grid on;
-axis tight;
-exportgraphics(gcf, 'figures/freq_resp.png', 'Resolution', 300);
-
+% Load LTspice Data
 filename = 'assets/Draft1.txt';
 fid = fopen(filename);
 data = textscan(fid, '%f ( %fdB , %f )', 'HeaderLines', 1); % Skip header
 fclose(fid);
 
-% Plot
+% Combined Plot
 figure;
-semilogx(data{1}, data{2}, 'LineWidth', 1.5);
+semilogx(freq_resp.Frequency, freq_resp.dB_Gain, '.-', 'LineWidth', 1.5); hold on;
+semilogx(data{1}, data{2}, '--', 'LineWidth', 1.5);
 xlabel('Frequency (Hz)');
-ylabel('Magnitude (dB)');
-title('LTspice Bode Plot Export');
+ylabel('Gain (dB)');
+title('Frequency Response Comparison');
+legend('Measured Response', 'LTspice Simulation', 'Location', 'Best');
 grid on;
 axis tight;
+ylim([-40 10]);
+exportgraphics(gcf, 'figures/freq_resp.png', 'Resolution', 300);
 
 diary off;

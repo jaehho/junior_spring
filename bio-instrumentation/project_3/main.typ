@@ -76,6 +76,12 @@ $
 
 == 4.1 Frequency Response
 
+#figure(
+  placement: auto,
+  caption: "Frequency Response",
+  image("figures/freq_resp.png")
+) <frequency-response>
+
 #let freq_resp_csv = csv("assets/freq_resp.csv")
 #show figure: set block(breakable: true)
 
@@ -94,11 +100,3 @@ $
 ) <frequency-response-values>
 
 This paper demonstrates the feasibility and effectiveness of a passive high-pass filter using two capacitors and a single inductor. The filter achieved predictable behavior with a sharp cutoff near the designed frequency and negligible attenuation in the passband. The configuration is suitable for applications requiring compact, passive high-frequency filtration with minimal component count.
-
-= Discussion
-
-- The table showed certain values
-- To get the proper corner frequency, how did you apply a frequency denormalization?
-- To get your inductor value, what impedance denormalization did you apply?
-- What component values did that give you?
-- What components were you able to find? Did that make you go back and redo the impedance denormalization?
