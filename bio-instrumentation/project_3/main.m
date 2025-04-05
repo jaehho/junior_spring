@@ -19,3 +19,5 @@ Cpp_3 = (Cp_3) / (R * w_c);
 fprintf('Cpp_1 = %.4f nF\n', Cpp_1 * 1e9);
 fprintf('Lpp_2 = %.4f mH\n', Lpp_2 * 1e3);
 fprintf('Cpp_3 = %.4f nF\n', Cpp_3 * 1e9);
+
+processGainData('meas_resp.csv', 'freq_resp.csv');
