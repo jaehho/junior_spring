@@ -3,7 +3,7 @@
 #show: ieee.with(
   title: [Passive High-Pass Filter],
   abstract: [
-    
+    This report presents the design, analysis, and implementation of a passive third-order LC high-pass filter. 
   ],
   index-terms: ("",),
   authors: (
@@ -19,6 +19,15 @@
 )
 
 = Introduction
+In physiological signal acquisition systems, such as ECG, EMG, or EEG, filtering is critical to isolate the desired biosignals from low-frequency noise and interference, including motion artifacts and baseline drift. A high-pass filter is particularly useful for eliminating these unwanted low-frequency components while preserving the integrity of higher-frequency biomedical signals. The third-order filter offers enhanced selectivity and steeper roll-off compared to lower-order designs, making it suitable for applications requiring precise frequency discrimination.
+
+The ladder or Pi configuration of the filter illustrated in @fig:circuit-design is a common design choice for high-pass filters, as it provides a compact and efficient layout.
+
+#figure(
+  placement: auto,
+  caption: "Passive High-Pass Filter",
+  image("assets/circuit_design.drawio.png")
+)<fig:circuit-design>
 
 = Methodology
 
@@ -50,41 +59,79 @@ $
 
 == Experimental Setup
 
+To explore the difficulties of working with inductors, the single inductor in the design was built with two inductors in series, $L_11$ and $L_12$. They were placed orthogonally to each other to minimize the coupling between them as shown in @fig:experimental-circuit. To keep the circuit compact and simple, the components values were chosen to match the design values as closely as possible, however, given the available components and the coupling between the inductors, the measured values are not identical to the design values. The component values are shown in @fig:component-values.
+
+#figure(
+  placement: auto,
+  caption: [Experimental Circuit: input at yellow wire, output at green wire. $L_11$ is the top inductor with its pins direction facing southeast, $L_12$ is the bottom inductor with its pins direction facing southwest.],
+  image("assets/circuit.jpg")
+)<fig:experimental-circuit>
+
 #figure(
   placement: auto,
   caption: "Component Values",
   table(
-    columns: 3,
+    columns: 4,
     stroke: (x, y) => if y <= 1 { (top: 0.5pt) },
     fill: (x, y) => if y > 0 and calc.rem(y, 2) == 0  { rgb("#efefef") },
     table.header(
       "Component",
+      "Design",
       "Ideal",
       "Measured"
     ),
-    $C_1$, $106.10 "nF"$, $93.9543 "nF"$,
-    $C_2$, $318.31 "nF"$, $354.231 "nF"$,
-    $L_11$, "NA", $68.5271 "mH"$,
-    $L_12$, "NA", $75.4791 "mH"$,
-    $L_1$, $119.37 "mH"$, $225.395 "mH"$,
-    $R_"ind"$, $0 thick Omega$, $104.016 thick Omega$,
-    $R_L$, $1 thick "k" Omega$, $0.99853 thick "k" Omega$,
+    $C_1$, $106.10 "nF"$, $100 "nF"$, $93.9543 "nF"$,
+    $C_2$, $318.31 "nF"$, $330 "nF"$, $354.231 "nF"$,
+    $L_11$, "NA", $68 "mH"$, $68.5271 "mH"$,
+    $L_12$, "NA", $68 "mH"$, $68.4791 "mH"$,
+    $L_1$, $119.37 "mH"$, "NA", $225.395 "mH"$,
+    $R_"ind"$, $0 thick Omega$, "NA", $104.016 thick Omega$,
+    $R_L$, $1 thick "k" Omega$, $1 "k" Omega$, $0.99853 thick "k" Omega$,
   )
-) <component-values>
+) <fig:component-values>
+
+The frequency response of the filter was measured by collecting the input and output voltages at octave intervals from $2 "Hz"$ to $20 "MHz"$ using the oscilloscope's function generator and probes connected to the input and output. The interval at which the expected cutoff frequency is located was measured with more detail, collecting data at $0.1 "kHz"$ intervals from $1 "kHz"$ to $2 "kHz"$.
+
+The roll-off rate was calculated as the maximum derivative of the gain with respect to frequency.
+
+== Simulation
+The circuit was simulated using LTSpice to compare the measured results with the expected behavior of the filter. The simulation was set up to match the experimental measured component values, including the inductor's winding resistance. 
 
 = Results and Discussion
 
-== 4.1 Frequency Response
+== Frequency Response
+
+The collected measurements are given in @fig:frequency-response-table, and the frequency response is plotted in @fig:frequency-response with the simulated response for comparison. The measured frequency response crosses the $-3 "dB"$ line at $1.218 "kHz"$, which is only slightly lower than the simulated cutoff frequency of $1.419 "kHz"$. The experimental frequency response also shows a plateau below $100 "Hz"$ which is likely due to the limited accuracy of the oscilloscope at low voltages, which is close to $110 "mV"$ at the output in this range. There is also an increase in the gain at high frequencies past around $1 "MHz"$ where @fig:frequency-response-table shows that the output does not deviate significantly, instead the input voltage appears to fall off. 
 
 #figure(
   placement: auto,
   caption: "Frequency Response",
   image("figures/freq_resp.png")
-) <frequency-response>
+) <fig:frequency-response>
 
+== Roll-off Rate
+
+For a third-order filter, the expected roll-off rate is $20 times 3 = 60 "dB" slash "decade"$, which is consistent with the simulated roll-off rate shown in @fig:gain-derivative. However, the measured roll-off rate was found to be approximately $46.01 "dB" slash "decade"$, which is closer to the expected $40 "dB" slash "decade"$ for a second-order filter. This may be again due to the oscilloscope's limited accuracy at low voltages, as @fig:gain-derivative shows, the measured roll-off rate only begins to increase after $100 "Hz"$, where at which point the simulated roll-off rate is already over $50 "dB"$. The derivative values are given in @fig:gain-derivative-table.
+
+#figure(
+  placement: auto,
+  caption: "Gain Derivative",
+  image("figures/derivative.png")
+) <fig:gain-derivative>
+
+// This paper demonstrates the feasibility and effectiveness of a passive high-pass filter using two capacitors and a single inductor. The filter achieved predictable behavior with a sharp cutoff near the designed frequency and negligible attenuation in the passband. The configuration is suitable for applications requiring compact, passive high-frequency filtration with minimal component count.
+
+= Appendix
+
+#figure(
+  placement: none,
+  caption: "LTSpice Schematic",
+  image("assets/LTSpice_sch.drawio.svg")
+)
+
+#pagebreak()
 #let freq_resp_csv = csv("assets/freq_resp.csv")
 #show figure: set block(breakable: true)
-
 #figure(
   placement: none,
   caption: "Measured Frequency Response Values",
@@ -92,11 +139,33 @@ $
     columns: freq_resp_csv.first().len(),
     stroke: (x, y) => if y <= 1 { (top: 0.5pt) },
     fill: (x, y) => if y > 0 and calc.rem(y, 2) == 0 { rgb("#efefef") },
+    // table.header(
+    //   ..freq_resp_csv.first() // Use the first row as the header
+    // ),
     table.header(
-      ..freq_resp_csv.first() // Use the first row as the header
+      [$f$ \ [Hz]], [$V_"in"$ \ [dB/decade]], [$V_"out"$ \ [dB/decade]], $A_"linear"$, [$A_"dB"$ \ [dB]]
     ),
     ..freq_resp_csv.slice(1).flatten() // Create a subslice starting from 2nd row (i.e. excluding the header)
   )
-) <frequency-response-values>
+) <fig:frequency-response-table>
 
-This paper demonstrates the feasibility and effectiveness of a passive high-pass filter using two capacitors and a single inductor. The filter achieved predictable behavior with a sharp cutoff near the designed frequency and negligible attenuation in the passband. The configuration is suitable for applications requiring compact, passive high-frequency filtration with minimal component count.
+#pagebreak()
+#let gain_derivative_csv = csv("assets/derivative.csv")
+#show figure: set block(breakable: true)
+#figure(
+  placement: none,
+  caption: "Gain Derivative Values",
+  table(
+    columns: gain_derivative_csv.first().len(),
+    stroke: (x, y) => if y <= 1 { (top: 0.5pt) },
+    fill: (x, y) => if y > 0 and calc.rem(y, 2) == 0 { rgb("#efefef") },
+    // table.header(
+    //   ..gain_derivative_csv.first() // Use the first row as the header
+    // ),
+    table.header(
+      // "Frequency\n[Hz]", "Measured\n[dB/decade]", "Simulated\n[dB/octave]"
+      [$f$ \ [Hz]], [Measured \ [dB/decade]], [Simulated \ [dB/decade]]
+    ),
+    ..gain_derivative_csv.slice(1).flatten() // Create a subslice starting from 2nd row (i.e. excluding the header)
+  )
+) <fig:gain-derivative-table>
