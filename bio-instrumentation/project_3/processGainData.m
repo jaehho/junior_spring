@@ -1,4 +1,4 @@
-function processGainData(inputFilename, outputFilename)
+function data = processGainData(inputFilename, outputFilename)
     % Read the input CSV file
     data = readtable(inputFilename);
 
@@ -14,5 +14,5 @@ function processGainData(inputFilename, outputFilename)
     writetable(data, outputFilename);
 
     % Display a confirmation message
-    fprintf('Processed %s saved to %s\n', inputFilename, outputFilename);
+    fprintf('Processed %s to %s\n', inputFilename, outputFilename);
 end

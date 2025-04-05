@@ -20,8 +20,6 @@
 
 = Introduction
 
-Passive filters are foundational in signal processing, enabling frequency domain control without active elements. High-pass filters (HPFs) allow signals with frequencies higher than a specified cutoff frequency to pass through while attenuating lower frequencies. This study investigates a variant of a passive high-pass filter using two capacitors and one inductor in a novel configuration, assessing its behavior with a standard 1 kΩ load impedance.
-
 = Methodology
 
 == Design Process
@@ -42,19 +40,19 @@ L'_2 = 1/C_2 = 0.7500\
 C'_3 = 1/L_3 = 2.0000
 $
 
-To denormalize the filter such that the cutoff frequency is $f_c = 500 "Hz"$ or $w_c = 2 pi f_c = 3141.59 "rad"slash upright(s)$, the component values should be scaled by $R slash w_c$. Letting $R = 10"K" Omega$ gives the following values:
+To denormalize the filter such that the cutoff frequency is $f_c = 1 "kHz"$ or $omega_c = 2 pi f_c = 3141.59 "rad"slash upright(s)$ and with a load resistance of $R_L = 1 thick "k" Omega$, the component values should be scaled accordingly:
 
 $
-C''_1 = C'_1 / (R * w_c) = 0.2122\
-L''_2 = L'_2 / (R * w_c) = 0.2387\
-C''_3 = C'_3 / (R * w_c) = 0.6366
+C''_1 = C'_1 / (R omega_c) = 106.10 "nF"\
+L''_2 = (R L'_2) / (omega_c) = 119.37 "mH"\
+C''_3 = C'_3 / (R omega_c) = 318.31 "nF"
 $
 
 == Experimental Setup
 
 #figure(
   placement: auto,
-  caption: "Theoretical Component Values",
+  caption: "Component Values",
   table(
     columns: 3,
     stroke: (x, y) => if y <= 1 { (top: 0.5pt) },
@@ -64,24 +62,21 @@ $
       "Ideal",
       "Measured"
     ),
-    $C_1$, $100 "nF"$, $93.9543 "nF"$,
-    $C_2$, $100 "nF"$, $354.231 "nF"$,
-    $L_1$, $0.2122 "mH"$, $225.395 "mH"$,
+    $C_1$, $106.10 "nF"$, $93.9543 "nF"$,
+    $C_2$, $318.31 "nF"$, $354.231 "nF"$,
+    $L_11$, "NA", $68.5271 "mH"$,
+    $L_12$, "NA", $75.4791 "mH"$,
+    $L_1$, $119.37 "mH"$, $225.395 "mH"$,
     $R_"ind"$, $0 thick Omega$, $104.016 thick Omega$,
     $R_L$, $1 thick "k" Omega$, $0.99853 thick "k" Omega$,
   )
 ) <component-values>
 
-68.6271
-75.4791
-
-225.395 m
-
 = Results and Discussion
 
 == 4.1 Frequency Response
 
-#let freq_resp_csv = csv("freq_resp.csv")
+#let freq_resp_csv = csv("assets/freq_resp.csv")
 #show figure: set block(breakable: true)
 
 #figure(
@@ -94,7 +89,7 @@ $
     table.header(
       ..freq_resp_csv.first() // Use the first row as the header
     ),
-    ..freq_resp_csv.slice(2).flatten() // Create a subslice starting from 2nd row (excluding the header)
+    ..freq_resp_csv.slice(1).flatten() // Create a subslice starting from 2nd row (i.e. excluding the header)
   )
 ) <frequency-response-values>
 
