@@ -38,15 +38,41 @@ fclose(fid);
 
 % Combined Plot
 figure;
-semilogx(freq_resp.Frequency, freq_resp.dB_Gain, '.-', 'LineWidth', 1.5); hold on;
-semilogx(data{1}, data{2}, '--', 'LineWidth', 1.5);
+semilogx(freq_resp.Frequency, freq_resp.dB_Gain, '.-', 'Color', 'b', 'LineWidth', 1.5); hold on; % blue-ish
+semilogx(data{1}, data{2}, '--', 'Color', 'r', 'LineWidth', 1.5); % orange
+
+% Horizontal line at -3 dB (Orange Dashed)
+yline(-3, '--', 'Color', '#EDB120', 'LineWidth', 1.5);
+
+% Find intersection for Measured Response (Magenta vertical dashed lines)
+meas_freqs = freq_resp.Frequency;
+meas_gains = freq_resp.dB_Gain;
+idx_meas = find(diff(sign(meas_gains + 3))); % -3 dB crossing
+for i = 1:length(idx_meas)
+    f_interp = interp1(meas_gains(idx_meas(i):idx_meas(i)+1), ...
+                       meas_freqs(idx_meas(i):idx_meas(i)+1), -3);
+    xline(f_interp, '-.', 'Color', 'b', 'LineWidth', 1.2); % Magenta
+end
+
+% Find intersection for Simulated Response (Cyan vertical dashed lines)
+sim_freqs = data{1};
+sim_gains = data{2};
+idx_sim = find(diff(sign(sim_gains + 3))); % -3 dB crossing
+for i = 1:length(idx_sim)
+    f_interp = interp1(sim_gains(idx_sim(i):idx_sim(i)+1), ...
+                       sim_freqs(idx_sim(i):idx_sim(i)+1), -3);
+    xline(f_interp, '-.', 'Color', 'r', 'LineWidth', 1.2); % Cyan
+end
+
 xlabel('Frequency (Hz)');
 ylabel('Gain (dB)');
 title('Frequency Response Comparison');
-legend('Measured Response', 'LTspice Simulation', 'Location', 'Best');
+legend('Measured Response', 'LTspice Simulation', '-3 dB Line', ...
+       'Location', 'Best');
 grid on;
 axis tight;
 ylim([-40 10]);
+
 exportgraphics(gcf, 'figures/freq_resp.png', 'Resolution', 300);
 
 diary off;
