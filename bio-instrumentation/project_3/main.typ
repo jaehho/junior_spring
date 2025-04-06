@@ -3,9 +3,9 @@
 #show: ieee.with(
   title: [Passive High-Pass Filter],
   abstract: [
-    This report presents the design, analysis, and implementation of a passive third-order LC high-pass filter. 
+    This report details the design, implementation, and analysis of a passive third-order LC high-pass filter for biomedical signal applications. The filter was derived from normalized Butterworth low-pass filter values and transformed into a high-pass configuration with a target cutoff frequency of 1 kHz. Experimental measurements and LTSpice simulations were conducted to characterize the frequency response and roll-off behavior. The measured cutoff frequency closely matched the design, though discrepancies in roll-off rate were observed, likely due to limitations in available equipment. Results confirm the filter's suitability for removing low-frequency artifacts.
   ],
-  index-terms: ("",),
+  index-terms: ("High-Pass","Bioinstrumentation","Filter Design"),
   authors: (
     (
       name: "Jaeho Cho",
@@ -63,12 +63,6 @@ To explore the difficulties of working with inductors, the single inductor in th
 
 #figure(
   placement: auto,
-  caption: [Experimental Circuit: input at yellow wire, output at green wire. $L_11$ is the top inductor with its pins direction facing southeast, $L_12$ is the bottom inductor with its pins direction facing southwest.],
-  image("assets/circuit.jpg")
-)<fig:experimental-circuit>
-
-#figure(
-  placement: auto,
   caption: "Component Values",
   table(
     columns: 4,
@@ -90,7 +84,7 @@ To explore the difficulties of working with inductors, the single inductor in th
   )
 ) <fig:component-values>
 
-The frequency response of the filter was measured by collecting the input and output voltages at octave intervals from $2 "Hz"$ to $20 "MHz"$ using the oscilloscope's function generator and probes connected to the input and output. The interval at which the expected cutoff frequency is located was measured with more detail, collecting data at $0.1 "kHz"$ intervals from $1 "kHz"$ to $2 "kHz"$.
+The frequency response of the filter was measured by collecting the input and output voltages at octave intervals from $2 "Hz"$ to $20 "MHz"$ using the oscilloscope's function generator and probes connected to the input and output. The interval at which the expected cutoff frequency is located was measured with more detail, collecting data at $0.1 "kHz"$ intervals from $1 "kHz"$ to $2 "kHz"$. At lower frequencies, the output voltage was below what the oscilloscope could measure, however, the oscilloscope's function generator was limited to a max voltage peak-to-peak of $5 "V"$, which was not enough to measure the output voltage at low frequencies. As a result, a separate function generator was used which could output a higher voltage but with a smaller range of frequencies.
 
 The roll-off rate was calculated as the maximum derivative of the gain with respect to frequency.
 
@@ -101,27 +95,33 @@ The circuit was simulated using LTSpice to compare the measured results with the
 
 == Frequency Response
 
-The collected measurements are given in @fig:frequency-response-table, and the frequency response is plotted in @fig:frequency-response with the simulated response for comparison. The measured frequency response crosses the $-3 "dB"$ line at $1.218 "kHz"$, which is only slightly lower than the simulated cutoff frequency of $1.419 "kHz"$. The experimental frequency response also shows a plateau below $100 "Hz"$ which is likely due to the limited accuracy of the oscilloscope at low voltages, which is close to $110 "mV"$ at the output in this range. There is also an increase in the gain at high frequencies past around $1 "MHz"$ where @fig:frequency-response-table shows that the output does not deviate significantly, instead the input voltage appears to fall off. 
+The collected measurements are given in @fig:frequency-response-table, and the frequency response is plotted in @fig:frequency-response with the simulated response for comparison. The measured frequency response crosses the $-3 "dB"$ line at $1.218 "kHz"$, which is only slightly lower than the simulated cutoff frequency of $1.419 "kHz"$. The original frequency response also shows a plateau below $100 "Hz"$ which is likely due to the limited accuracy of the oscilloscope at low voltages, which is close to $110 "mV"$ at the output in this range. The frequency response from the higher voltage function generator seems to support this hypothesis as it lacks the plateau. Unfortunately, given the limited frequency range of the function generator, the lower frequencies could not be measured and from the plot, and from @fig:frequency-response-table, the output voltage again hit the supposed minimum voltage of $110 "mV"$ at $20 "Hz"$.
+
+From the original function generator there is also an increase in the gain at high frequencies past around $1 "MHz"$ where @fig:frequency-response-table shows that the output does not deviate significantly, instead the input voltage appears to fall off; the cause of this is not clear.
 
 #figure(
   placement: auto,
-  caption: "Frequency Response",
+  caption: "Frequency Response: the measured responses crosses the -3 dB line at 1.218 kHz, and the simulated response crosses at 1.419 kHz.",
   image("figures/freq_resp.png")
 ) <fig:frequency-response>
 
 == Roll-off Rate
 
-For a third-order filter, the expected roll-off rate is $20 times 3 = 60 "dB" slash "decade"$, which is consistent with the simulated roll-off rate shown in @fig:gain-derivative. However, the measured roll-off rate was found to be approximately $46.01 "dB" slash "decade"$, which is closer to the expected $40 "dB" slash "decade"$ for a second-order filter. This may be again due to the oscilloscope's limited accuracy at low voltages, as @fig:gain-derivative shows, the measured roll-off rate only begins to increase after $100 "Hz"$, where at which point the simulated roll-off rate is already over $50 "dB"$. The derivative values are given in @fig:gain-derivative-table.
+For a third-order filter, the expected roll-off rate is $20 times 3 = 60 "dB" slash "decade"$, which is consistent with the simulated roll-off rate shown in @fig:gain-derivative. However, the measured roll-off rate was found to be approximately $46.01 "dB" slash "decade"$, which is closer to the expected $40 "dB" slash "decade"$ for a second-order filter. This may again be due to the oscilloscope's limited accuracy at low voltages as the measured roll-off rate only begins to increase after $100 "Hz"$, where at which point the simulated roll-off rate is already over $50 "dB"$. However, using a higher voltage function generator did not fully address this issue as the roll-off does improve slightly but still significantly lower than the simulation. The derivative values are given in @fig:gain-derivative-table.
 
 #figure(
   placement: auto,
-  caption: "Gain Derivative",
+  caption: "Derivative of Gain: the roll-off rate is interpreted as the maximum in the stopband; the measured roll-off rate is approximately 46.01 dB/decade, and the simulated roll-off rate is 60 dB/decade.",
   image("figures/derivative.png")
 ) <fig:gain-derivative>
 
-// This paper demonstrates the feasibility and effectiveness of a passive high-pass filter using two capacitors and a single inductor. The filter achieved predictable behavior with a sharp cutoff near the designed frequency and negligible attenuation in the passband. The configuration is suitable for applications requiring compact, passive high-frequency filtration with minimal component count.
-
 = Appendix
+
+#figure(
+  placement: none,
+  caption: [Experimental Circuit: input at yellow wire, output at green wire. $L_11$ is the top inductor with its pins direction facing southeast, $L_12$ is the bottom inductor with its pins direction facing southwest.],
+  image("assets/circuit.jpg")
+)<fig:experimental-circuit>
 
 #figure(
   placement: none,
@@ -143,7 +143,7 @@ For a third-order filter, the expected roll-off rate is $20 times 3 = 60 "dB" sl
     //   ..freq_resp_csv.first() // Use the first row as the header
     // ),
     table.header(
-      [$f$ \ [Hz]], [$V_"in"$ \ [dB/decade]], [$V_"out"$ \ [dB/decade]], $A_"linear"$, [$A_"dB"$ \ [dB]]
+      [$f$ \ [Hz]], [Original \ $V_"in"$ \ [V]], [Original \ $V_"out"$ \ [V]], [Original \ Gain \ [dB]], [High \ $V_"in"$ \ [V]], [High \ $V_"out"$ \ [V]], [High \ Gain \ [dB]]
     ),
     ..freq_resp_csv.slice(1).flatten() // Create a subslice starting from 2nd row (i.e. excluding the header)
   )
@@ -164,7 +164,7 @@ For a third-order filter, the expected roll-off rate is $20 times 3 = 60 "dB" sl
     // ),
     table.header(
       // "Frequency\n[Hz]", "Measured\n[dB/decade]", "Simulated\n[dB/octave]"
-      [$f$ \ [Hz]], [Measured \ [dB/decade]], [Simulated \ [dB/decade]]
+      [$f$ \ [Hz]], [Original \ [dB/decade]], [High \ [dB/decade]], [Simulated \ [dB/decade]]
     ),
     ..gain_derivative_csv.slice(1).flatten() // Create a subslice starting from 2nd row (i.e. excluding the header)
   )

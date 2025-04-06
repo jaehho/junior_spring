@@ -4,8 +4,11 @@ Cp_3 = 2.0000
 Cpp_1 = 106.1033 nF
 Lpp_2 = 119.3662 mH
 Cpp_3 = 318.3099 nF
-Processed assets/meas_resp.csv to assets/freq_resp.csv
-Measured -3 dB point #1: 1278.63 Hz
+Processed assets/meas_resp.csv to assets/freq_resp_original.csv
+Processed assets/meas_resp_high_voltage.csv to assets/freq_resp_high_voltage.csv
+Original Measured -3 dB point #1: 1218.37 Hz
+High Voltage Measured -3 dB point #1: 1278.63 Hz
 Simulated -3 dB point #1: 1419.20 Hz
-roll-off rate (Measured): 47.06 dB/decade at 400.00 Hz
-roll-off rate (Simulated): 59.85 dB/decade at 282.51 Hz
+Max roll-off rate (Measured - Original): 46.01 dB/decade at 600.00 Hz
+Max roll-off rate (Measured - High Voltage): 47.06 dB/decade at 400.00 Hz
+Max roll-off rate (Simulated): 59.85 dB/decade at 282.51 Hz
