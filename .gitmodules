@@ -1,3 +1,6 @@
 [submodule "Theoretical-Neuroscience"]
 	path = Theoretical-Neuroscience
 	url = https://github.com/jaehho/Theoretical-Neuroscience.git
+[submodule "medical-imaging/project_3/ds001499"]
+	path = medical-imaging/project_3/ds001499
+	url = https://github.com/OpenNeuroDatasets/ds001499.git
