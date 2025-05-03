@@ -169,3 +169,4 @@ For a third-order filter, the expected roll-off rate is $20 times 3 = 60 "dB" sl
     ..gain_derivative_csv.slice(1).flatten() // Create a subslice starting from 2nd row (i.e. excluding the header)
   )
 ) <fig:gain-derivative-table>
+
