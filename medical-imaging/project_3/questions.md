@@ -1,0 +1,1 @@
+border artifact in first level hor and vert details
