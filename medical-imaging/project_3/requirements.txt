@@ -2,3 +2,5 @@ numpy
 matplotlib
 nibabel
 PyWavelets
+opencv-python
+ipywidgets
