@@ -4,3 +4,4 @@ nibabel
 PyWavelets
 opencv-python
 ipywidgets
+tqdm
